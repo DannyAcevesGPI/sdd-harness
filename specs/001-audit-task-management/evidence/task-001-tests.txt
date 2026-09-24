@@ -1,0 +1,24 @@
+Command: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests -v
+Executed UTC: 2026-09-24T16:48:24.230835+00:00
+Exit code: 0
+Scope: TASK-001; AC-003 completed-task case and AC-006 completion operation deferred to TASK-002.
+
+test_001_create_normalized_distinct_tasks (test_audit_tasks.TaskServiceTests.test_001_create_normalized_distinct_tasks) ... ok
+test_002_invalid_titles_leave_state_unchanged (test_audit_tasks.TaskServiceTests.test_002_invalid_titles_leave_state_unchanged) ... ok
+test_003_list_owned_tasks_in_creation_order (test_audit_tasks.TaskServiceTests.test_003_list_owned_tasks_in_creation_order) ... ok
+test_004_empty_owner_cannot_see_other_tasks (test_audit_tasks.TaskServiceTests.test_004_empty_owner_cannot_see_other_tasks) ... ok
+test_006_actor_identifiers_are_compared_exactly (test_audit_tasks.TaskServiceTests.test_006_actor_identifiers_are_compared_exactly) ... ok
+test_006_invalid_identity_rejected_without_mutation (test_audit_tasks.TaskServiceTests.test_006_invalid_identity_rejected_without_mutation) ... ok
+test_008_creation_cannot_assign_another_owner (test_audit_tasks.TaskServiceTests.test_008_creation_cannot_assign_another_owner) ... ok
+test_010_returned_objects_and_instances_are_isolated (test_audit_tasks.TaskServiceTests.test_010_returned_objects_and_instances_are_isolated) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK
+
+PASS: syntax and indentation (compile + tabnanny.process_tokens)
+{
+  "src/audit_tasks.py": "ba695c132dacd92946a06505bb4249da4cb63ed1466c82d1503203127c9d37eb",
+  "tests/test_audit_tasks.py": "9cd21b1c754d68ce71a093113d86d8ea38dcc4554491835b880e82e789dcf504"
+}

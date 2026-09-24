@@ -1,0 +1,28 @@
+Captured UTC: 2026-09-24T16:50:42.558161+00:00
+Command: python3 - (compile(source, path, 'exec'); tabnanny.process_tokens; AST inspection)
+Exit code: 0
+[
+  {
+    "file": "src/audit_tasks.py",
+    "syntax": "PASS",
+    "indentation": "PASS",
+    "imports": [
+      "dataclasses"
+    ]
+  },
+  {
+    "file": "tests/test_audit_tasks.py",
+    "syntax": "PASS",
+    "indentation": "PASS",
+    "imports": [
+      "dataclasses",
+      "audit_tasks",
+      "unittest"
+    ]
+  }
+]
+Test methods: 11; skip decorators: 0.
+Manual review: PASS - descriptive names, type annotations on application interface, scoped state, fixed errors, no secrets or external dependencies, owner checks before mutation, no mocks, meaningful assertions.
+Formatting: manual review; automatic formatter NOT_APPLICABLE (not configured).
+Lint/type-check tools: NOT_APPLICABLE (not configured); not reported as automatic PASS.
+Build/migrations/external integration checks: NOT_APPLICABLE (local library, no distribution or external integration).

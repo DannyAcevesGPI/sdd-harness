@@ -1,0 +1,2 @@
+4427d83a147aca13b22838d06361cebf54568a610fbb28188d38db22d8b3f3f9  src/audit_tasks.py
+f158bfac7d3e4db109805a00c67760480cfb8c049726e7bc5dc2e1e14838d512  tests/test_audit_tasks.py

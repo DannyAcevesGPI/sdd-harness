@@ -1,0 +1,110 @@
+Fixture: /tmp/audit08-T2PGTK
+Command: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests -v
+Phase: deliberate order defect, original unchanged tests
+Exit code: 1
+This failure is expected in the isolated audit fixture; it is not primary-feature compliance evidence.
+
+test_001_create_normalized_distinct_tasks (test_audit_tasks.TaskServiceTests.test_001_create_normalized_distinct_tasks) ... FAIL
+test_002_invalid_titles_leave_state_unchanged (test_audit_tasks.TaskServiceTests.test_002_invalid_titles_leave_state_unchanged) ... ok
+test_003_list_owned_tasks_in_creation_order (test_audit_tasks.TaskServiceTests.test_003_list_owned_tasks_in_creation_order) ... FAIL
+test_004_empty_owner_cannot_see_other_tasks (test_audit_tasks.TaskServiceTests.test_004_empty_owner_cannot_see_other_tasks) ... ok
+test_005_completion_is_idempotent_and_preserves_other_data (test_audit_tasks.TaskServiceTests.test_005_completion_is_idempotent_and_preserves_other_data) ... FAIL
+test_006_actor_identifiers_are_compared_exactly (test_audit_tasks.TaskServiceTests.test_006_actor_identifiers_are_compared_exactly) ... ok
+test_006_invalid_identity_rejected_without_mutation (test_audit_tasks.TaskServiceTests.test_006_invalid_identity_rejected_without_mutation) ... ok
+test_007_unavailable_tasks_share_error_without_mutation (test_audit_tasks.TaskServiceTests.test_007_unavailable_tasks_share_error_without_mutation) ... ok
+test_008_creation_cannot_assign_another_owner (test_audit_tasks.TaskServiceTests.test_008_creation_cannot_assign_another_owner) ... ok
+test_010_returned_objects_and_instances_are_isolated (test_audit_tasks.TaskServiceTests.test_010_returned_objects_and_instances_are_isolated) ... ok
+test_011_full_local_flow_for_two_actors (test_audit_tasks.TaskServiceTests.test_011_full_local_flow_for_two_actors) ... FAIL
+
+======================================================================
+FAIL: test_001_create_normalized_distinct_tasks (test_audit_tasks.TaskServiceTests.test_001_create_normalized_distinct_tasks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/audit08-T2PGTK/tests/test_audit_tasks.py", line 24, in test_001_create_normalized_distinct_tasks
+    self.assertEqual(self.service.list_tasks(actor_id="actor-a"), [first, second])
+AssertionError: Lists differ: [Task(id=2, title='Revisar informe', owner_id='act[95 chars]NG')] != [Task(id=1, title='Revisar informe', owner_id='act[95 chars]NG')]
+
+First differing element 0:
+Task(id=2, title='Revisar informe', owner_id='actor-a', status='PENDING')
+Task(id=1, title='Revisar informe', owner_id='actor-a', status='PENDING')
+
+- [Task(id=2, title='Revisar informe', owner_id='actor-a', status='PENDING'),
+?          ^
+
++ [Task(id=1, title='Revisar informe', owner_id='actor-a', status='PENDING'),
+?          ^
+
+-  Task(id=1, title='Revisar informe', owner_id='actor-a', status='PENDING')]
+?          ^
+
++  Task(id=2, title='Revisar informe', owner_id='actor-a', status='PENDING')]
+?          ^
+
+
+======================================================================
+FAIL: test_003_list_owned_tasks_in_creation_order (test_audit_tasks.TaskServiceTests.test_003_list_owned_tasks_in_creation_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/audit08-T2PGTK/tests/test_audit_tasks.py", line 38, in test_003_list_owned_tasks_in_creation_order
+    self.assertEqual(self.service.list_tasks(actor_id="actor-a"), [first, last])
+AssertionError: Lists differ: [Task(id=3, title='Ultima', owner_id='actor-a', st[78 chars]NG')] != [Task(id=1, title='Primera', owner_id='actor-a', s[78 chars]NG')]
+
+First differing element 0:
+Task(id=3, title='Ultima', owner_id='actor-a', status='PENDING')
+Task(id=1, title='Primera', owner_id='actor-a', status='PENDING')
+
+- [Task(id=3, title='Ultima', owner_id='actor-a', status='PENDING'),
+-  Task(id=1, title='Primera', owner_id='actor-a', status='PENDING')]
+? ^                                                                 ^
+
++ [Task(id=1, title='Primera', owner_id='actor-a', status='PENDING'),
+? ^                                                                 ^
+
++  Task(id=3, title='Ultima', owner_id='actor-a', status='PENDING')]
+
+======================================================================
+FAIL: test_005_completion_is_idempotent_and_preserves_other_data (test_audit_tasks.TaskServiceTests.test_005_completion_is_idempotent_and_preserves_other_data)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/audit08-T2PGTK/tests/test_audit_tasks.py", line 60, in test_005_completion_is_idempotent_and_preserves_other_data
+    self.assertEqual(self.service.list_tasks(actor_id="actor-a"), [completed, second])
+AssertionError: Lists differ: [Task(id=2, title='Segunda', owner_id='actor-a', s[81 chars]ED')] != [Task(id=1, title='Primera', owner_id='actor-a', s[81 chars]NG')]
+
+First differing element 0:
+Task(id=2, title='Segunda', owner_id='actor-a', status='PENDING')
+Task(id=1, title='Primera', owner_id='actor-a', status='COMPLETED')
+
+- [Task(id=2, title='Segunda', owner_id='actor-a', status='PENDING'),
+-  Task(id=1, title='Primera', owner_id='actor-a', status='COMPLETED')]
+? ^                                                                   ^
+
++ [Task(id=1, title='Primera', owner_id='actor-a', status='COMPLETED'),
+? ^                                                                   ^
+
++  Task(id=2, title='Segunda', owner_id='actor-a', status='PENDING')]
+
+======================================================================
+FAIL: test_011_full_local_flow_for_two_actors (test_audit_tasks.TaskServiceTests.test_011_full_local_flow_for_two_actors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/audit08-T2PGTK/tests/test_audit_tasks.py", line 134, in test_011_full_local_flow_for_two_actors
+    self.assertEqual(self.service.list_tasks(actor_id="actor-a"), [first, last])
+AssertionError: Lists differ: [Task(id=3, title='Entregar', owner_id='actor-a', [81 chars]NG')] != [Task(id=1, title='Preparar', owner_id='actor-a', [81 chars]NG')]
+
+First differing element 0:
+Task(id=3, title='Entregar', owner_id='actor-a', status='PENDING')
+Task(id=1, title='Preparar', owner_id='actor-a', status='PENDING')
+
+- [Task(id=3, title='Entregar', owner_id='actor-a', status='PENDING'),
+-  Task(id=1, title='Preparar', owner_id='actor-a', status='PENDING')]
+? ^                                                                  ^
+
++ [Task(id=1, title='Preparar', owner_id='actor-a', status='PENDING'),
+? ^                                                                  ^
+
++  Task(id=3, title='Entregar', owner_id='actor-a', status='PENDING')]
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.003s
+
+FAILED (failures=4)
