@@ -4,7 +4,8 @@
 
 This document transfers the current audit state of the **SDD Harness** to a new working session/agent.
 
-The Harness is being formally audited before establishing the `1.0.0` baseline.
+The Harness has completed its formal audit and is declared `1.0.0 STABLE`.
+The verified candidate baseline and authorized promotion are recorded in section 44.
 
 The following audit stages have already been completed and MUST NOT be repeated unless a later cross-document finding provides concrete evidence that a previously approved artifact must be revisited.
 
@@ -19,13 +20,13 @@ AUDIT-06  README.md                    PASS
 AUDIT-07  Cross-document consistency   PASS
 AUDIT-08  End-to-end simulation        PASS
 AUDIT-09  Final findings/corrections   PASS
-AUDIT-10  Baseline readiness           BLOCKED
+AUDIT-10  Baseline readiness           PASS
 ```
 
 Current findings:
 
 ```text
-Open findings: 1
+Open findings: 0
 
 AUDIT-FINDING-001 through AUDIT-FINDING-031:
 RESOLVED
@@ -34,7 +35,7 @@ AUDIT-FINDING-032 through AUDIT-FINDING-036:
 RESOLVED
 
 AUDIT-FINDING-037:
-OPEN — baseline capture pending human authorization
+RESOLVED — baseline captured and re-audited
 
 Next finding ID:
 AUDIT-FINDING-038
@@ -43,7 +44,7 @@ AUDIT-FINDING-038
 The current formal stage is:
 
 ```text
-AUDIT-10 — Baseline readiness: awaiting baseline decision (section 43)
+AUDIT-10 — PASS; 1.0.0 STABLE (section 44)
 ```
 
 ---
@@ -1693,30 +1694,29 @@ Harness version:
 1.0.0
 
 Harness status:
-PRE-RELEASE
+STABLE
 
 Completed audits:
-01–09
+01–10
 
 Latest audit:
-10 — BLOCKED
+10 — PASS
 
 Next audit:
-None; complete AUDIT-10 after resolving AUDIT-FINDING-037
+None scheduled; audit cycle completed
 
 Resolved findings:
-001–036
+001–037
 
 Open findings:
-1 — AUDIT-FINDING-037
+0
 
 Next finding:
 AUDIT-FINDING-038
 
 Next action:
-Obtain authorization for baseline capture and publication metadata, then
-re-audit AUDIT-FINDING-037. See section 43. Do not commit or declare STABLE
-without the corresponding human decision.
+No corrective action pending. See section 44 for baseline verification and
+the authorized local promotion. Tags and remote publication are not authorized.
 ```
 
 The objective is not to redesign the Harness.
@@ -2328,3 +2328,79 @@ two-commit proposal. Git identity is already configured; no identity is invented
 The candidate remains PRE-RELEASE until the baseline commit is inspected and
 the finding is re-audited. The initial BLOCKED record above is historical;
 the approval alone does not resolve finding 037.
+
+---
+
+# 44. AUDIT-10 — Baseline verification and authorized promotion
+
+Date: 2026-09-24. Result: PASS. Harness: 1.0.0 STABLE.
+This section supersedes the pending states in section 43 without rewriting
+its initial evidence or the historical outcomes of sections 39–42.
+
+## Authorization and baseline
+
+Authority: the user approved the two-commit proposal, requested waiting until
+the repository existed, then supplied `git@github.com:DannyAcevesGPI/sdd-harness.git`.
+The wait was respected. Origin now points to that URL. No remote access check,
+tag, push or publication was performed or is implied by configuring origin.
+The existing branch master and configured Git identity were retained.
+
+Verified initial commit:
+`34740af8f8a3d0bf3c86a996adcded4c02fb4185`
+Message: `chore: capture audited pre-release baseline`.
+
+The candidate intentionally preserves PRE-RELEASE and the then-open finding;
+resolution follows inspection of the real commit, not its proposal. Its 44
+files include the 17 Harness artifacts, empty existing .gitignore, handoff,
+approved feature artifacts, source/tests and complete positive/adverse evidence.
+No temporary fixture directory, cache, dependency installation or unrelated file
+was added. No pre-exercise commit is fabricated: this is the expressly approved
+post-audit capture.
+
+## Re-audit of AUDIT-FINDING-037
+
+Severity: MEDIUM. Classification: BLOCKING before correction. Status: RESOLVED.
+Lifecycle: human decision → baseline commit → inventory/content verification
+→ re-audit → RESOLVED.
+
+Observed checks before commit: staged inventory exactly matched 44 authorized
+paths; every staged blob matched its working-tree file; all 42 previously
+reviewed file hashes matched AUDIT-09. A limited private-key/token-pattern
+scan found no matches; this is not claimed as an exhaustive secret audit.
+
+Observed checks after commit: all 44 committed blobs matched reviewed working
+files; the working tree was clean; committed source/test hashes matched
+`specs/001-audit-task-management/evidence/hashes.txt`. The commit exists and
+provides the recoverable revision missing at the initial review. No independent
+blocking finding remains. Git inventory/content checks are not application tests.
+
+## Final readiness and propagation
+
+| Gate | Result | Evidence |
+|---|---|---|
+| Prior audits and consolidation | PASS | Sections 23–28, 39–42; results retained, not freshly rerun |
+| Real representative feature execution | PASS | AUDIT-08 validation and preserved execution logs |
+| Evidence still applies | PASS | Reviewed content and committed source/test hashes agree |
+| Baseline capture | PASS | Actual 44-file candidate commit inspected above |
+| Required corrections | PASS | Findings 001–037 RESOLVED; zero OPEN |
+| Human-authorized promotion | PASS | Approved two-commit proposal, resumed after destination supplied |
+
+The second commit records only README §§24–25 and this handoff's current status
+and closure. README now describes the actual post-audit baseline sequence and
+1.0.0 STABLE instead of a pending PRE-RELEASE roadmap. No Constitution, standard,
+command, template, feature requirement, plan, task, implementation, test or
+earlier execution evidence changes. Their approvals and evidence remain valid;
+no feature revalidation is triggered by release documentation alone.
+
+No application tests were rerun for these documentation/Git operations. Existing
+real PASS/FAIL logs were preserved, not relabeled as new executions. The stable
+designation covers the agent-operated procedural Harness and exercised local
+specimen, not production authentication, exhaustive revision-path testing or
+an automated workflow engine.
+
+AUDIT-01 through AUDIT-10: PASS. AUDIT-FINDING-001 through 037: RESOLVED.
+Open findings: 0. Next available finding: AUDIT-FINDING-038.
+The promotion is to be captured in the separately authorized second local commit;
+its identifier is available from Git history, not predicted inside its own content.
+No tag or remote publication is included. Further push/release actions require
+separate authorization.

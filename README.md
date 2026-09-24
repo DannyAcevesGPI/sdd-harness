@@ -1222,10 +1222,10 @@ Versión del Harness:
 Estado:
 
 ```text
-PRE-RELEASE
+STABLE
 ```
 
-La versión deberá considerarse estable únicamente después de completar:
+La versión se declara estable después de completar:
 
 1. revisión integral del Harness;
 2. corrección de inconsistencias;
@@ -1235,9 +1235,15 @@ La versión deberá considerarse estable únicamente después de completar:
 
 ---
 
-# 25. Próximos pasos
+# 25. Baseline auditada
 
-Antes de utilizar esta versión como base estable:
+AUDIT-01 a AUDIT-10 completados: PASS. Sin hallazgos abiertos.
+El cierre y la autorización humana constan en `handoff.md`, sección 44.
+
+Baseline candidata posterior al ejercicio, conservada inicialmente como PRE-RELEASE:
+`34740af8f8a3d0bf3c86a996adcded4c02fb4185`.
+
+Secuencia realmente ejecutada y autorizada:
 
 ```text
 Harness Documentation
@@ -1245,8 +1251,6 @@ Harness Documentation
 Integral Review
         ↓
 Consistency Check
-        ↓
-Baseline Commit
         ↓
 Test Feature
         ↓
@@ -1256,9 +1260,21 @@ Lessons Learned
         ↓
 Harness Adjustments
         ↓
+Post-audit Baseline Commit
+        ↓
+Baseline Verification
+        ↓
 Version:
 1.0.0
 
 Status:
-PRE-RELEASE
+STABLE
 ```
+
+STABLE se refiere al Harness procedimental auditado, no a una aplicación
+productiva ni a un motor CLI automatizado. La muestra validada usa identidades
+sintéticas y estado en memoria; no demuestra autenticación productiva ni todas
+las rutas posibles de revisión de SPEC/PLAN.
+
+La promoción se registra en un segundo commit local. No implica tag, push ni
+publicación remota; estas operaciones requieren autorización separada.
