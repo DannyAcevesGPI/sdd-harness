@@ -65,6 +65,11 @@ Antes de iniciar la validación deberá verificarse:
 -   [ ] No existen bloqueos conocidos pendientes.
 -   [ ] Existe implementación para validar.
 
+Para features nuevas, ejecutar `python3 src/check_harness_state.py` y revisar
+el registro de decisiones vigente. Un gate sin aprobación persistente, revocado
+o con huella inconsistente impide `SPEC COMPLIANCE: PASS`. El legado SPEC-001 a
+SPEC-006 se informa como no verificable, sin fabricar aprobación retroactiva.
+
 Si estas condiciones no se cumplen:
 
 VALIDATION STATUS:

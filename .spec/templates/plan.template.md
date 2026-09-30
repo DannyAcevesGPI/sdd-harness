@@ -633,5 +633,14 @@ autoaprobarlo.
 
 [PENDIENTE]
 
+**Decisión explícita y alcance:**
+
+[PENDIENTE; registrar el contenido de la decisión humana]
+
+**Registro durable:**
+
+Registrar el evento de aprobación y su huella en
+`specs/<feature-id>/decisions.json` y comprobarlo antes de generar TASKS.
+
 No deberá generarse implementación a partir de un plan
 que no haya sido aprobado.

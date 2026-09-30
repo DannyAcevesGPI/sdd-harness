@@ -685,6 +685,12 @@ APPROVED
 
 mediante aprobación humana explícita.
 
+Para features nuevas, registrar la aprobación de TASKS con su alcance y
+huella normalizada en `decisions.json` y ejecutar el comprobador de
+`docs/state-reconstruction.md` antes de `/implement`. Las transiciones de
+estado y checklists operativos permitidos no cambian el contenido autorizado;
+un cambio de objetivos, dependencias, pruebas o alcance sí recupera el gate.
+
 ------------------------------------------------------------------------
 
 # 21. Salida

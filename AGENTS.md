@@ -24,6 +24,9 @@ Precedencia:
 
 Si hay conflicto relevante, detenerse, identificar el nivel dueño y resolverlo antes de continuar.
 
+El chat no es el registro durable de gates. Para features nuevas consultar
+`specs/<feature-id>/decisions.json` y `docs/state-reconstruction.md`.
+
 ---
 
 # 2. Mandatory Bootstrap
@@ -33,7 +36,8 @@ Antes de trabajo significativo:
 1. Leer `.spec/constitution.md`.
 2. Determinar solicitud, feature, fase SDD, artefactos existentes, command aplicable y standards relevantes.
 3. Revisar `handoff.md` cuando el estado auditado del Harness sea relevante.
-4. Tratar `src/`, `tests/`, migraciones y configuración de aplicación como read-only antes de `/implement`.
+4. Reconstruir el gate desde artefactos y ejecutar `python3 src/check_harness_state.py` cuando aplique.
+5. Tratar `src/`, `tests/`, migraciones y configuración de aplicación como read-only antes de `/implement`.
 
 ---
 

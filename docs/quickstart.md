@@ -15,6 +15,11 @@ Con eso debes saber:
 - qué feature o fase aplica;
 - qué command SDD debes leer completo.
 
+Para una sesion nueva, comprobar `git status --short --branch`, abrir los
+artefactos de la feature activa y ejecutar `python3 src/check_harness_state.py`.
+El procedimiento y el contrato de aprobaciones estan en
+`docs/state-reconstruction.md`; no consultar el chat para reconstruir gates.
+
 ## 2. Elegir command
 
 - Nueva funcionalidad o cambio de comportamiento: `.spec/commands/specify.md`
@@ -45,6 +50,7 @@ Verifica:
 - Feature de prueba validada: `specs/001-audit-task-management/`
 - Optimización operativa validada: `specs/002-agent-operating-readiness/`
 - Optimización de contexto: `specs/003-context-window-optimization/`
+- Registro durable y bootstrap sin chat: `docs/state-reconstruction.md`
 
 ## 5. Evidencia
 

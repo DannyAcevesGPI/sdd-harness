@@ -530,3 +530,13 @@ autoaprobar el documento.
 **Fecha de aprobación:**
 
 [PENDIENTE]
+
+**Decisión explícita y alcance:**
+
+[PENDIENTE; registrar el contenido de la decisión humana]
+
+**Registro durable:**
+
+Registrar el evento y huella normalizada de TASKS en
+`specs/<feature-id>/decisions.json`. Solo estados y marcas operativas definidos
+en `docs/state-reconstruction.md` pueden cambiar sin renovar el gate.

@@ -41,8 +41,12 @@ Consultar solo cuando aplique al trabajo:
 - [`docs/tdd.md`](tdd.md) — ciclo TDD y evidencia por tarea.
 - `docs/agents/subagents.md`
 - `docs/agents/hooks.md`
+- [`docs/state-reconstruction.md`](state-reconstruction.md) — registro durable y bootstrap sin chat.
 
 ## Evidencia y features
+
+Las aprobaciones de SPEC-001 a SPEC-006 que dependen del chat se tratan como
+legado no verificable, sin cambiar sus validaciones.
 
 - `specs/001-audit-task-management/validation.md` — feature de prueba validada.
 - `specs/001-audit-task-management/evidence/` — evidencia funcional y adversa.
@@ -50,6 +54,11 @@ Consultar solo cuando aplique al trabajo:
 - `specs/002-agent-operating-readiness/evidence/implementation.md`
 - `specs/003-context-window-optimization/validation.md` — handoff vivo y contexto optimizado.
 - `specs/003-context-window-optimization/evidence/implementation.md`
+- `specs/004-harness-adoption-guide/validation.md` — guía de adopción validada.
+- `specs/005-harness-changelog/validation.md` — changelog validado.
+- `specs/006-tdd-workflow/validation.md` — TDD validado.
+- `specs/007-chat-independent-state/validation.md` — estado sin chat validado.
+- `specs/007-chat-independent-state/decisions.json` — registro de decisiones.
 
 ## Historia auditada
 

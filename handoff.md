@@ -44,6 +44,10 @@ Quickstart: `docs/quickstart.md`
 
 # 3. Features validadas
 
+Las aprobaciones de SPEC-001 a SPEC-006 cuya prueba depende del chat son
+**legado no verificable**. Sus estados de validación se conservan; no se
+inventan respaldos retroactivos. Protocolo nuevo: `docs/state-reconstruction.md`.
+
 ## SPEC-001 — Audit task management
 
 ```text
@@ -90,6 +94,27 @@ Evidencia:
 - `docs/index.md`
 - `docs/audit-history.md`
 
+## SPEC-004 a SPEC-006 — Features posteriores
+
+Todas tienen `SPEC COMPLIANCE: PASS` y `FEATURE STATUS: VALIDATED`:
+
+- SPEC-004: `specs/004-harness-adoption-guide/validation.md`
+- SPEC-005: `specs/005-harness-changelog/validation.md`
+- SPEC-006: `specs/006-tdd-workflow/validation.md`
+
+El detalle y la evidencia permanecen en sus carpetas `specs/`.
+
+## SPEC-007 — Estado reconstruible sin chat
+
+```text
+SPEC COMPLIANCE: PASS
+FEATURE STATUS: VALIDATED
+```
+
+- `specs/007-chat-independent-state/validation.md`
+- `specs/007-chat-independent-state/decisions.json`
+- `docs/state-reconstruction.md`
+
 ---
 
 # 4. Reglas operativas vigentes
@@ -107,7 +132,10 @@ Evidencia:
 
 # 5. Próximo trabajo
 
-No hay bloqueos conocidos.
+No hay feature activa ni bloqueos conocidos. La siguiente modificación deberá
+iniciar con `/specify` o revisar un artefacto existente según su nivel dueño.
+Para reconstruir el estado sin chat, seguir `docs/state-reconstruction.md` y
+ejecutar `python3 src/check_harness_state.py`.
 
 Antes de iniciar una nueva modificación:
 

@@ -396,6 +396,16 @@ autoaprobarla.
 
 [PENDIENTE]
 
+**Decisión explícita y alcance:**
+
+[PENDIENTE; registrar el contenido de la decisión humana, no solo "en chat"]
+
+**Registro durable:**
+
+`specs/<feature-id>/decisions.json` deberá contener el evento y la huella del
+contenido autorizado antes de avanzar a PLAN. Véase
+`docs/state-reconstruction.md`.
+
 La implementación no podrá comenzar mientras la especificación
 no se encuentre en estado:
 

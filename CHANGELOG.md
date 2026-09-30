@@ -5,6 +5,9 @@ detalle; este archivo resume hitos para consulta rápida.
 
 ## 2026-09-30
 
+- Registro durable de aprobaciones y decisiones, comprobador de huellas y
+  arranque de sesiones sin chat.
+  [SPEC-007](specs/007-chat-independent-state/validation.md).
 - Guía para adoptar el Harness en proyectos nuevos, con separación entre base
   reusable y evidencia local. [SPEC-004](specs/004-harness-adoption-guide/validation.md);
   commit `8515abd`.

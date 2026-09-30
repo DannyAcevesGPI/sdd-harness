@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "events": [
+    {
+      "id": "DECISION-001",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Registrar legado como no verificable y exigir registro completo desde ahora",
+      "scope": "Q-001 de SPEC-007; aprobaciones históricas de SPEC-001 a SPEC-006",
+      "artifact": "specs/007-chat-independent-state/spec.md",
+      "source": "Respuesta humana registrada en Q-001 de SPEC-007"
+    },
+    {
+      "id": "DECISION-002",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Aprobado",
+      "scope": "SPEC-007 versión 0.1.0, incluida Q-001; autoriza preparar PLAN",
+      "artifact": "specs/007-chat-independent-state/spec.md",
+      "artifact_sha256": "e51f2305e4e6e49b3933ac0da2b7b6deba757d24372480034217fc500fcf25ea",
+      "source": "Decisión humana explícita reproducida en la sección 17 de SPEC-007"
+    },
+    {
+      "id": "DECISION-003",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "aprobado",
+      "scope": "Aprobación histórica de PLAN-007 versión 0.1.0, reemplazada por la revisión 0.2.0",
+      "artifact": "specs/007-chat-independent-state/plan.md",
+      "source": "Historial de aprobación descrito en la sección 23 de PLAN-007"
+    },
+    {
+      "id": "DECISION-004",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Ok entonces apruebo el plan",
+      "scope": "PLAN-007 versión 0.2.0; normalización limitada y comprobador que falla cerrado",
+      "artifact": "specs/007-chat-independent-state/plan.md",
+      "artifact_sha256": "1d1dce640b276cdd232b840f8daa96941aa415366d89f97508b8e6f806653653",
+      "source": "Decisión humana explícita reproducida en la sección 23 de PLAN-007"
+    },
+    {
+      "id": "DECISION-005",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "aprobado",
+      "scope": "TASKS-007 versión 0.1.0, TASK-001 a TASK-005; autoriza implementación",
+      "artifact": "specs/007-chat-independent-state/tasks.md",
+      "artifact_sha256": "14361ef1046379690e8d98c17b089e80f21706a2b29e6951577d7b16edd07ed0",
+      "source": "Decisión humana explícita reproducida en la sección 8 de TASKS-007"
+    }
+  ]
+}

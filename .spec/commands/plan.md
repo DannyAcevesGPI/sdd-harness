@@ -679,6 +679,11 @@ APPROVED
 
 mediante aprobación humana explícita.
 
+Para features nuevas, registrar la decisión humana y la huella del contenido
+autorizado de PLAN en `decisions.json` siguiendo
+`docs/state-reconstruction.md`. Ejecutar el comprobador local antes de
+generar TASKS; un fallo de procedencia o huella bloquea el gate.
+
 ---
 
 # 21. Salida

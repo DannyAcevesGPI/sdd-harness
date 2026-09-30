@@ -493,6 +493,12 @@ Si posteriormente cambia un requisito aprobado deberá actualizarse la
 SPEC y reevaluarse el impacto sobre PLAN, TASKS, implementación y
 validación.
 
+Las respuestas humanas que afectan requisitos o gates nuevos deberán quedar
+registradas con su resultado y alcance en `decisions.json`, además de reflejarse
+en la SPEC. La referencia al chat no sustituye el contenido de la decisión;
+seguir `docs/state-reconstruction.md`. Si cambió contenido autorizado, obtener
+de nuevo las aprobaciones afectadas y comprobar su huella antes de continuar.
+
 ------------------------------------------------------------------------
 
 # 18. Salida

@@ -54,6 +54,12 @@ Antes de modificar código deberá verificarse:
 -   [ ] No existen `[NEEDS CLARIFICATION]` bloqueantes.
 -   [ ] No existe un bloqueo conocido que impida la tarea.
 
+Para features nuevas posteriores a SPEC-007, comprobar también los registros
+vigentes con `python3 src/check_harness_state.py` antes de iniciar. Un gate
+ausente, revocado o con huella distinta bloquea implementación. SPEC-007 es la
+transición: su registro se completa durante TASK-004 y se comprueba en TASK-005;
+esto no elimina sus aprobaciones humanas ya documentadas.
+
 Si alguna precondición obligatoria no se cumple:
 
 IMPLEMENTATION STATUS:

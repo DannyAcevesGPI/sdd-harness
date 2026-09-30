@@ -292,6 +292,12 @@ y producir evidencia, pero no podrán autoaprobar SPEC, PLAN o TASKS.
 
 La aprobación deberá ser explícita.
 
+Para decisiones y aprobaciones nuevas, el resultado humano, su alcance y el
+artefacto afectado deberán quedar registrados en el repositorio antes de
+continuar a la fase dependiente. El chat puede transmitir la decisión, pero no
+ser su único registro recuperable. El registro no sustituye a la persona ni
+constituye por sí mismo una aprobación.
+
 La ausencia de comentarios, objeciones o cambios solicitados no deberá
 interpretarse como aprobación.
 

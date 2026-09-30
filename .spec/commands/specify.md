@@ -444,6 +444,12 @@ APPROVED
 
 cuando exista aprobación humana explícita.
 
+Para features nuevas sujetas al protocolo de `docs/state-reconstruction.md`,
+registrar la decisión, alcance y huella en `decisions.json` después de la
+transición. Ejecutar `python3 src/check_harness_state.py`; un registro ausente
+o inconsistente impide avanzar a `/plan`. El legado SPEC-001 a SPEC-006 no se
+reinterpreta como aprobado por este mecanismo.
+
 ---
 
 # 17. Salida del comando
