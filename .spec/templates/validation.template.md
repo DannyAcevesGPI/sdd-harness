@@ -219,6 +219,21 @@ Supported results:
 
 FAIL, BLOCKED and NOT_RUN do not constitute evidence of compliance.
 
+## 8.1 TDD Evidence Review
+
+Aplicar a features posteriores a la política TDD. En cada cambio de
+comportamiento automatizable verificar RED antes del código productivo, causado
+por comportamiento faltante, y GREEN posterior. Enlazar evidencia dedicada;
+no copiar logs largos aquí.
+
+| TASK / TEST | Aplicabilidad | RED y causa | GREEN / refactor | Motivo y verificación alternativa | Resultado |
+|-------------|---------------|-------------|------------------|-----------------------------------|-----------|
+| TASK-001 / TEST-001 | OBLIGATORIO / NO APLICA | [Evidencia o N/A] | [Evidencia o N/A] | [Motivo y alternativa si N/A] | PENDING |
+
+Una falla de entorno no cuenta como RED y mantiene BLOCKED la tarea afectada.
+Una excepción sin verificación suficiente no permite PASS. No exigir evidencia
+RED retroactiva a features ya validadas.
+
 ---
 
 # 9. Evidence Quality Review
@@ -600,6 +615,8 @@ Final validation may result in PASS only when:
 - [ ] All MUST requirements are PASS.
 - [ ] All mandatory acceptance criteria are PASS.
 - [ ] Required tests are PASS.
+- [ ] Applicable TDD RED/GREEN evidence is valid, or a justified non-applicable
+      case has sufficient alternative verification; environment blockers remain BLOCKED.
 - [ ] Mandatory quality gates are PASS.
 - [ ] Mandatory security requirements are PASS.
 - [ ] No known regression remains unresolved.

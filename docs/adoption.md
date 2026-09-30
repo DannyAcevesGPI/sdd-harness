@@ -12,6 +12,7 @@ Copia la base del Harness:
 AGENTS.md
 docs/quickstart.md
 docs/index.md
+docs/tdd.md
 docs/agents/
 ```
 
@@ -86,6 +87,9 @@ La regla operativa se mantiene:
 ```text
 No implementation without an approved SPEC, PLAN and TASKS.
 ```
+
+Para cambios de comportamiento automatizable, aplica TDD durante `/implement`
+después de esos gates. Consulta la [guía TDD](tdd.md) para aplicarlo a tu stack.
 
 ## 6. Evidencia por feature
 

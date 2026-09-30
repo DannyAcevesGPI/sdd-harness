@@ -169,6 +169,21 @@ Esta sección describe el resultado esperado, no código detallado.
 - TEST-[XXX] — [Comportamiento]
 - TEST-[XXX] — [Comportamiento]
 
+### TDD
+
+**Aplicabilidad:** [OBLIGATORIO para comportamiento automatizable | NO APLICA]
+
+**Caso RED previsto:** [TEST-[XXX] y comportamiento faltante; completar en
+`/implement` después de aprobar TASKS]
+
+**Evidencia GREEN esperada:** [Comando, resultado y enlace a evidencia de la
+feature; completar durante `/implement`]
+
+**Si no aplica:** [Motivo y verificación alternativa]
+
+Un fallo de entorno al ejecutar una prueba automatizable bloquea la tarea;
+no justifica NO APLICA.
+
 ### Validaciones
 
 - [ ] Código implementado.
@@ -194,6 +209,8 @@ La tarea se considera `DONE` cuando:
 - [ ] La implementación respeta el PLAN.
 - [ ] La implementación respeta la SPEC.
 - [ ] Las pruebas requeridas pasan.
+- [ ] RED/GREEN tienen evidencia válida cuando TDD aplica, o existe motivo y
+      verificación alternativa suficiente cuando no aplica.
 - [ ] No existen bloqueos pendientes.
 - [ ] La evidencia está disponible.
 

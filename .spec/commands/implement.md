@@ -250,22 +250,26 @@ SPEC REVISION REQUIRED
 
 # 8. Pruebas durante implementación
 
-Las pruebas requeridas por la TASK deberán implementarse junto con el
-comportamiento correspondiente.
+Para cambios de comportamiento automatizable, TDD es obligatorio:
 
-Cuando sea apropiado, el ciclo recomendado será:
+1.  RED: implementar o ajustar el caso aprobado y ejecutarlo antes del cambio
+    productivo. Confirmar que falla por el comportamiento faltante o incorrecto.
+2.  GREEN: aplicar el cambio mínimo y repetir hasta que el caso pase; ejecutar
+    las pruebas relevantes.
+3.  REFACTOR: mejorar el código solo cuando sea necesario y mantener las
+    pruebas en verde.
 
-1.  identificar comportamiento;
-2.  implementar o actualizar prueba;
-3.  implementar comportamiento;
-4.  ejecutar prueba;
-5.  corregir implementación;
-6.  repetir hasta obtener resultado válido.
+Registrar TEST, requisito/AC, comando, resultado y causa del RED, comando y
+resultado GREEN, y resultado posterior al refactor cuando exista. La prueba
+que ya pasaba antes del cambio no demuestra RED; revisar el caso sin fabricar
+un fallo. Fallas de sintaxis, configuración, dependencias o infraestructura
+no son RED válido. Si el entorno impide ejecutar una prueba automatizable,
+registrar BLOCK y dejar la TASK en BLOCKED hasta resolverlo.
 
-No se exige una metodología específica como TDD salvo que el proyecto lo
-establezca.
-
-Sí se exige evidencia verificable.
+Documentación, validación exclusivamente manual y refactors sin comportamiento
+nuevo requieren motivo y verificación alternativa. Una preferencia por omitir
+TDD no justifica una excepción. Seguir `.spec/standards/testing.md` y guardar
+el detalle en `specs/<feature-id>/evidence/`.
 
 ------------------------------------------------------------------------
 
@@ -651,6 +655,13 @@ Resultado:
 
 PASS \| FAIL \| BLOCKED
 
+## TDD
+
+Para comportamiento automatizable: enlazar evidencia RED y GREEN por TEST,
+incluida la causa del fallo y el orden respecto al cambio productivo; anotar
+refactor y nueva ejecución cuando exista. Si no aplica: registrar motivo y
+verificación alternativa. Un impedimento de entorno queda BLOCKED.
+
 ## Quality checks
 
 -   Lint: PASS
@@ -694,6 +705,8 @@ solamente cuando:
 -   [ ] El alcance de la TASK fue respetado.
 -   [ ] Los criterios de aceptación relacionados tienen evidencia.
 -   [ ] Las pruebas requeridas están en PASS.
+-   [ ] La evidencia TDD RED/GREEN aplicable es válida, o existe motivo y
+        verificación alternativa para un caso fuera de TDD.
 -   [ ] Las pruebas de regresión relevantes están en PASS.
 -   [ ] Los quality checks relevantes están en PASS.
 -   [ ] Los requisitos de seguridad relacionados están cubiertos.

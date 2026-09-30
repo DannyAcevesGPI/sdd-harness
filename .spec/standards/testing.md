@@ -197,9 +197,9 @@ El manejo de secretos deberá cumplir con el Estándar de Seguridad.
 
 # 8. Pruebas de regresión
 
-Cuando se corrija un defecto reproducible deberá considerarse
-agregar una prueba que demuestre el comportamiento incorrecto
-antes de la corrección.
+Cuando se corrija un defecto reproducible y automatizable deberá
+agregarse o ajustar primero una prueba que demuestre el fallo por el
+comportamiento incorrecto, conforme a la política TDD de la sección 21.
 
 El objetivo es evitar que el mismo defecto vuelva a introducirse.
 
@@ -432,6 +432,45 @@ no implica por sí mismo cumplimiento de la especificación.
 
 ---
 
+# 21. Test-Driven Development
+
+TDD es obligatorio para cambios nuevos de comportamiento que puedan probarse
+automáticamente, incluidas correcciones de defectos reproducibles. PLAN y
+TASKS preparan los casos trazados a requisitos y criterios de aceptación;
+el código de prueba se modifica solo durante `/implement`, después de aprobar
+SPEC, PLAN y TASKS.
+
+Para cada caso aplicable:
+
+1. RED: escribir o ajustar una prueba de comportamiento y ejecutarla antes de
+   cambiar el código productivo. Debe fallar por el comportamiento faltante o
+   incorrecto que la tarea pretende resolver.
+2. GREEN: hacer el cambio mínimo para que esa prueba pase y ejecutar las
+   pruebas relevantes.
+3. REFACTOR: mejorar la implementación cuando sea necesario, manteniendo las
+   pruebas en verde. No se exige refactorizar si no hay mejora justificada.
+
+Registrar por tarea la prueba y su relación con el requisito o criterio, el
+comando y resultado RED con causa, el comando y resultado GREEN, y el resultado
+posterior a refactorización cuando la hubo. Guardar detalle bajo
+`specs/<feature-id>/evidence/` y enlazarlo desde TASKS y validación. No
+fabricar un RED ni contar como RED válido una falla de sintaxis, configuración,
+dependencia o infraestructura. Si la prueba ya pasa antes del cambio, revisar
+el caso para identificar el comportamiento realmente faltante.
+
+Documentación, validación exclusivamente manual y refactors sin comportamiento
+nuevo requieren motivo explícito y verificación alternativa. La preferencia
+por omitir TDD no es una excepción. Si el comportamiento es automatizable pero
+el entorno impide ejecutar la prueba requerida, la tarea queda BLOCKED hasta
+resolverlo; la excepción no permite declarar PASS. `/validate` comprueba la
+evidencia RED/GREEN o la justificación y verificación alternativa antes de
+marcar cumplimiento.
+
+La política aplica prospectivamente. No se reescribe evidencia de features ya
+validadas ni se inventan ciclos TDD históricos.
+
+---
+
 # Checklist de pruebas
 
 Antes de considerar validada una funcionalidad deberá verificarse:
@@ -445,4 +484,6 @@ Antes de considerar validada una funcionalidad deberá verificarse:
 - [ ] No existen pruebas relevantes fallidas.
 - [ ] Las integraciones importantes fueron verificadas adecuadamente.
 - [ ] Los bugs corregidos tienen pruebas de regresión cuando corresponde.
+- [ ] Los cambios de comportamiento automatizable tienen evidencia TDD RED/GREEN, o un bloqueo registrado.
+- [ ] Los cambios fuera de TDD tienen motivo y verificación alternativa documentados.
 - [ ] La evidencia de validación puede relacionarse con los requisitos.

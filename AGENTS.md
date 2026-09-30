@@ -122,6 +122,7 @@ Durante `/implement`:
 - Reutilizar patrones y archivos existentes.
 - Evitar scope creep, refactors no relacionados, dependencias innecesarias y arquitectura especulativa.
 - Ejecutar pruebas/verificaciones relevantes y registrar evidencia.
+- TDD obligatorio para comportamiento automatizable: `.spec/standards/testing.md` §21; guía `docs/tdd.md`.
 - No debilitar pruebas para conseguir PASS.
 - Registrar discoveries fuera de alcance como `DISCOVERY-[XXX]`; no implementarlos automáticamente.
 

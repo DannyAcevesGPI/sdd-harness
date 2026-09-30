@@ -38,6 +38,7 @@ Consultar solo cuando aplique al trabajo:
 
 - `docs/quickstart.md`
 - `docs/adoption.md` — uso del Harness en proyectos nuevos.
+- [`docs/tdd.md`](tdd.md) — ciclo TDD y evidencia por tarea.
 - `docs/agents/subagents.md`
 - `docs/agents/hooks.md`
 

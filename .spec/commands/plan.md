@@ -429,6 +429,15 @@ El plan deberá definir el tipo de prueba.
 Los IDs concretos TEST-[XXX] podrán asignarse posteriormente
 durante la generación de tareas.
 
+Para cada cambio de comportamiento automatizable, el PLAN deberá identificar
+casos derivados de requisitos y criterios de aceptación, nivel de prueba,
+herramienta o comando previsto y viabilidad de ejecutar RED antes de modificar
+código productivo. Cuando TDD no aplique, deberá registrar el motivo y la
+verificación alternativa. La política está en `.spec/standards/testing.md`.
+
+La planificación no autoriza escribir código de pruebas: ese trabajo comienza
+en `/implement` tras aprobar SPEC, PLAN y TASKS.
+
 ---
 
 # 13. Análisis de impacto

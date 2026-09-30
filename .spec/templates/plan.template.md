@@ -372,6 +372,16 @@ y riesgos relevantes.
 Los IDs concretos `TEST-XXX` podrán asignarse durante
 la implementación o preparación de tareas.
 
+## 11.2 Estrategia TDD
+
+| Criterio | Comportamiento automatizable | Caso previsto y comando/nivel | Motivo y verificación alternativa si no aplica |
+|----------|-------------------------------|-------------------------------|--------------------------------------------------|
+| AC-001 | YES/NO | [Caso y comando previstos; sin ejecutar aún] | [Motivo y alternativa, si NO] |
+
+Para comportamiento automatizable, TDD es obligatorio según
+`.spec/standards/testing.md`. Preparar casos aquí no autoriza modificar código
+de pruebas antes de `/implement` ni sustituye el gate de TASKS.
+
 ---
 
 # 12. Observabilidad

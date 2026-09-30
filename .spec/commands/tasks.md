@@ -444,6 +444,16 @@ TEST-004 Task se crea con datos válidos.
 
 TEST-005 Task rechaza datos inválidos.
 
+Para tareas con comportamiento automatizable, TASKS deberá identificar los
+casos TEST derivados del PLAN, su relación con requisitos y AC, y exigir en
+su Definition of Done evidencia de RED válido antes del cambio productivo y
+GREEN después. El ciclo se ejecuta en `/implement`, no durante `/tasks`.
+
+Para trabajo fuera del ámbito TDD, la tarea deberá registrar el motivo y la
+verificación alternativa. Una prueba automatizable bloqueada por entorno no
+es una excepción: la tarea permanecerá BLOCKED. Véase
+`.spec/standards/testing.md`.
+
 ------------------------------------------------------------------------
 
 # 13. Definition of Done

@@ -217,6 +217,16 @@ Deberá detectar cuando sea razonablemente posible:
 
 PASS técnico no implica automáticamente PASS funcional.
 
+Para cambios de comportamiento automatizable posteriores a esta política,
+verificar por TEST el RED causado por comportamiento faltante antes del cambio
+productivo y el GREEN posterior; revisar la ejecución tras refactor cuando
+lo hubo. Un fallo de entorno o un test que ya pasaba no demuestran RED.
+
+Para trabajo fuera de TDD, revisar motivo y verificación alternativa. Una
+prueba automatizable bloqueada por entorno mantiene BLOCKED; una excepción
+sin evidencia suficiente no permite PASS. Aplicar `.spec/standards/testing.md`
+y la sección TDD del template de validación.
+
 ------------------------------------------------------------------------
 
 # 8. Quality Gates
