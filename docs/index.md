@@ -36,6 +36,7 @@ Consultar solo cuando aplique al trabajo:
 ## Operación de agentes
 
 - `docs/quickstart.md`
+- `docs/adoption.md` — uso del Harness en proyectos nuevos.
 - `docs/agents/subagents.md`
 - `docs/agents/hooks.md`
 

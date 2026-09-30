@@ -28,6 +28,9 @@ Para features que recorren el flujo completo:
 
 > No implementation without an approved SPEC, PLAN and TASKS.
 
+Para adoptar este Harness en otros proyectos, usa la guia dedicada:
+[`docs/adoption.md`](docs/adoption.md).
+
 ---
 
 # 1. ¿Qué es Spec-Driven Development?
