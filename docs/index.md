@@ -7,6 +7,7 @@ Este índice ayuda a decidir qué leer primero y qué abrir solo bajo demanda.
 - `AGENTS.md` — índice operativo para agentes.
 - `.spec/constitution.md` — reglas no negociables.
 - `handoff.md` — estado vivo del repositorio.
+- [`CHANGELOG.md`](../CHANGELOG.md) — hitos y cambios relevantes.
 
 ## Lectura por fase
 

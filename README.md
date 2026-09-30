@@ -31,6 +31,8 @@ Para features que recorren el flujo completo:
 Para adoptar este Harness en otros proyectos, usa la guia dedicada:
 [`docs/adoption.md`](docs/adoption.md).
 
+Historial de cambios: [`CHANGELOG.md`](CHANGELOG.md).
+
 ---
 
 # 1. ¿Qué es Spec-Driven Development?
