@@ -128,6 +128,7 @@ FEATURE STATUS: VALIDATED
 
 - `specs/008-portable-harness-adoption/validation.md`
 - `specs/008-portable-harness-adoption/evidence/implementation.md`
+- `specs/008-portable-harness-adoption/evidence/ci.md` — primer CI remoto PASS.
 
 ---
 

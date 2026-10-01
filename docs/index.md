@@ -63,6 +63,7 @@ legado no verificable, sin cambiar sus validaciones.
 - `specs/008-portable-harness-adoption/validation.md` — adopción portable validada.
 - `specs/008-portable-harness-adoption/decisions.json` — aprobaciones vigentes.
 - `specs/008-portable-harness-adoption/evidence/implementation.md` — evidencia de implementación.
+- `specs/008-portable-harness-adoption/evidence/ci.md` — primer run remoto PASS.
 
 ## Historia auditada
 
