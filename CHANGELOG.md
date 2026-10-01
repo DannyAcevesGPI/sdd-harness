@@ -5,6 +5,8 @@ detalle; este archivo resume hitos para consulta rápida.
 
 ## 2026-09-30
 
+- Adopción portable con CLI, smoke test aislado, proyecciones verificables,
+  CI y README breve. [SPEC-008](specs/008-portable-harness-adoption/validation.md).
 - Registro durable de aprobaciones y decisiones, comprobador de huellas y
   arranque de sesiones sin chat.
   [SPEC-007](specs/007-chat-independent-state/validation.md).

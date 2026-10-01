@@ -69,7 +69,9 @@ PYTHONPATH=src python3 -c 'from pathlib import Path; from hashlib import sha256;
 Cambiar la ruta del ejemplo por el artefacto real. El algoritmo conserva texto,
 orden y estructura. Solo normaliza estados de encabezado, estados de TASK,
 `Estado actual` en seccion de estado y, en `tasks.md`, marcas de checklists y
-estado de la tabla de orden. Evidencia nueva va en `evidence/`, no en texto
+estado de la tabla de orden (incluida la variante de cuatro columnas, con
+`TODO` canonico para preservar aprobaciones previas a esta ampliacion).
+Evidencia nueva va en `evidence/`, no en texto
 libre dentro de TASKS. Un cambio de requisito, titulo, dependencia, prueba o
 alcance cambia la huella. Formatos desconocidos deben fallar cerrado.
 
@@ -78,10 +80,29 @@ metadata de estado/aprobacion; calcular huella; agregar evento; ejecutar el
 comprobador; avanzar unicamente con PASS. Una decision ambigua requiere
 aclaracion. El hash detecta cambios de contenido, no demuestra identidad.
 
+## Proyecciones de estado
+
+`handoff.md` contiene exactamente un bloque `json harness-state`:
+
+```json harness-state
+{"schema_version": 1, "active": [], "validated": []}
+```
+
+Cada elemento de `active` contiene `id` (`SPEC-NNN`), `phase` (SPEC, PLAN,
+TASKS, IMPLEMENT o VALIDATE) y `next` (accion o aprobacion siguiente). El
+checker deriva ese bloque de los artefactos; no lee aprobaciones desde el
+handoff. `docs/index.md` debe enlazar los artefactos activos y la validacion
+de cada feature validada. `INVALID_HANDOFF`, `STALE_HANDOFF` y `STALE_INDEX`
+son FAIL; actualizar estas proyecciones durante cada fase.
+
 ## Legado y transicion
 
 SPEC-001 a SPEC-006 conservan sus estados y validaciones, pero las
 aprobaciones cuya unica prueba depende del chat son **legado no verificable**.
+La exencion del checker para esos seis directorios exactos solo aplica cuando
+existen juntos `docs/audit-history.md` y el ledger de SPEC-007 en el repo
+fuente. La adopcion no copia ninguno; un proyecto nuevo puede usar incluso
+el mismo slug sin heredar la exencion.
 No se reconstruyen huellas historicas ni se inventan aprobaciones. SPEC-007
 documento sus aprobaciones humanas en sus propios artefactos durante la
 transicion; su ledger se completa en TASK-004 y se comprueba antes de validar.

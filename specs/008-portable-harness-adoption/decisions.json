@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "events": [
+    {
+      "id": "DECISION-001",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "lo apruebo",
+      "scope": "SPEC-008 version 0.1.0 y excepcion transitoria de la seccion 12: registrar solo esta aprobacion en specs/008-portable-harness-adoption/decisions.json antes de PLAN; no autoriza implementacion",
+      "artifact": "specs/008-portable-harness-adoption/spec.md",
+      "artifact_sha256": "ac3c859af67a17aea31aee37cbdc7ef32c984b0f98b1f931ddd0a064c83b4bf2",
+      "source": "Decision humana explicita reproducida en la seccion 17 de SPEC-008, en respuesta a la pregunta conjunta sobre SPEC y excepcion"
+    },
+    {
+      "id": "DECISION-002",
+      "kind": "SUPERSESSION",
+      "actor": "Codex (agente, registro de estado)",
+      "date": "2026-09-30",
+      "decision": "La propuesta SPEC-008 v0.2.0 reemplaza el contenido v0.1.0 aprobado; la aprobacion anterior deja de ser aplicable y la nueva revision queda IN_REVIEW",
+      "scope": "Solo la vigencia de DECISION-001 sobre specs/008-portable-harness-adoption/spec.md; no constituye aprobacion humana de v0.2.0",
+      "artifact": "specs/008-portable-harness-adoption/spec.md",
+      "supersedes": "DECISION-001",
+      "source": "Revision de contenido y estado documentada en la seccion 17 de SPEC-008"
+    },
+    {
+      "id": "DECISION-003",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Listo aprobado",
+      "scope": "SPEC-008 version 0.2.0 y excepcion transitoria de la seccion 12: ledger y solo estado/enlaces de handoff.md y docs/index.md durante SPEC/PLAN/TASKS; autoriza PLAN, no implementacion",
+      "artifact": "specs/008-portable-harness-adoption/spec.md",
+      "artifact_sha256": "5f2e03ab9c812f2f71969704714fca6038bfea340520a8f46a5510d35befdc5c",
+      "source": "Decision humana explicita reproducida en la seccion 17 de SPEC-008, en respuesta a la pregunta sobre v0.2.0 y excepcion ampliada"
+    },
+    {
+      "id": "DECISION-004",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Listo aprobado",
+      "scope": "PLAN-008 version 0.1.0; autoriza preparar TASKS-008, no implementacion antes de aprobar TASKS",
+      "artifact": "specs/008-portable-harness-adoption/plan.md",
+      "artifact_sha256": "698efd4501e043644cc5360765e1bd97c50a875840961e57e326c1e459099dbd",
+      "source": "Decision humana explicita reproducida en la seccion 21 de PLAN-008, en respuesta al plan en revision"
+    },
+    {
+      "id": "DECISION-005",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-09-30",
+      "decision": "Aprobado",
+      "scope": "TASKS-008 version 0.1.0; autoriza implementacion de TASK-001 a TASK-007 conforme a dependencias y alcance aprobados",
+      "artifact": "specs/008-portable-harness-adoption/tasks.md",
+      "artifact_sha256": "c297dd94575ed2724ce9fa00b228e0bcc78ae2e7f9bb3b2b17e03f677a53b9cd",
+      "source": "Decision humana explicita reproducida en la seccion 7 de TASKS-008, en respuesta a su revision"
+    }
+  ]
+}

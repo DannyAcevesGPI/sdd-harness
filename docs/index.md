@@ -38,6 +38,7 @@ Consultar solo cuando aplique al trabajo:
 
 - `docs/quickstart.md`
 - `docs/adoption.md` — uso del Harness en proyectos nuevos.
+- [`docs/reference.md`](reference.md) — referencia extensa e historia editorial.
 - [`docs/tdd.md`](tdd.md) — ciclo TDD y evidencia por tarea.
 - `docs/agents/subagents.md`
 - `docs/agents/hooks.md`
@@ -59,6 +60,9 @@ legado no verificable, sin cambiar sus validaciones.
 - `specs/006-tdd-workflow/validation.md` — TDD validado.
 - `specs/007-chat-independent-state/validation.md` — estado sin chat validado.
 - `specs/007-chat-independent-state/decisions.json` — registro de decisiones.
+- `specs/008-portable-harness-adoption/validation.md` — adopción portable validada.
+- `specs/008-portable-harness-adoption/decisions.json` — aprobaciones vigentes.
+- `specs/008-portable-harness-adoption/evidence/implementation.md` — evidencia de implementación.
 
 ## Historia auditada
 

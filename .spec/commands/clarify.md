@@ -498,6 +498,8 @@ registradas con su resultado y alcance en `decisions.json`, además de reflejars
 en la SPEC. La referencia al chat no sustituye el contenido de la decisión;
 seguir `docs/state-reconstruction.md`. Si cambió contenido autorizado, obtener
 de nuevo las aprobaciones afectadas y comprobar su huella antes de continuar.
+Durante `/clarify`, se permite modificar ese ledger y solo estado/enlaces de
+`handoff.md` y `docs/index.md`; no se autoriza implementación anticipada.
 
 ------------------------------------------------------------------------
 

@@ -690,6 +690,8 @@ huella normalizada en `decisions.json` y ejecutar el comprobador de
 `docs/state-reconstruction.md` antes de `/implement`. Las transiciones de
 estado y checklists operativos permitidos no cambian el contenido autorizado;
 un cambio de objetivos, dependencias, pruebas o alcance sí recupera el gate.
+Durante `/tasks`, se permite modificar ese ledger y solo estado/enlaces de
+`handoff.md` y `docs/index.md`; no código ni pruebas antes de `/implement`.
 
 ------------------------------------------------------------------------
 

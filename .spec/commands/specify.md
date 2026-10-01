@@ -510,7 +510,9 @@ Durante `/specify` el agente NO deberá:
 - seleccionar tecnologías sin necesidad;
 - generar `plan.md`;
 - generar `tasks.md`;
-- modificar archivos fuera de la SPEC;
+- modificar archivos fuera de SPEC, excepto crear `decisions.json` vacio de la
+  feature, registrar decisiones humanas recibidas y actualizar solo
+  estado/enlaces en `handoff.md` y `docs/index.md`;
 - resolver silenciosamente decisiones de negocio;
 - marcar la SPEC como APPROVED por cuenta propia.
 

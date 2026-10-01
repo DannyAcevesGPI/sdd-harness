@@ -23,6 +23,17 @@ class HarnessStateTests(unittest.TestCase):
             encoding="utf-8",
         )
         self._write_events([self._approval()])
+        (self.root / "handoff.md").write_text(
+            '# Live\n```json harness-state\n'
+            '{"schema_version": 1, "active": [{"id": "SPEC-008", '
+            '"phase": "PLAN", "next": "/plan"}], "validated": []}\n'
+            '```\n', encoding="utf-8",
+        )
+        docs = self.root / "docs"
+        docs.mkdir()
+        (docs / "index.md").write_text(
+            '- `specs/008-example/spec.md`\n', encoding="utf-8"
+        )
 
     def _approval(self, artifact=None, **changes):
         artifact = artifact or self.spec
@@ -54,6 +65,34 @@ class HarnessStateTests(unittest.TestCase):
     def test_valid_approval_is_self_contained(self):
         self.assertEqual(self._codes(), set())
 
+    def test_missing_or_stale_handoff_fails(self):
+        handoff = self.root / "handoff.md"
+        handoff.write_text("# Live\n", encoding="utf-8")
+        self.assertIn("INVALID_HANDOFF", self._codes())
+        handoff.write_text(
+            '```json harness-state\n'
+            '{"schema_version": 1, "active": [], "validated": []}\n'
+            '```\n', encoding="utf-8",
+        )
+        self.assertIn("STALE_HANDOFF", self._codes())
+
+    def test_missing_index_link_fails(self):
+        (self.root / "docs/index.md").write_text("# Empty\n", encoding="utf-8")
+        self.assertIn("STALE_INDEX", self._codes())
+
+    def test_extra_index_link_and_duplicate_handoff_block_fail(self):
+        index = self.root / "docs/index.md"
+        index.write_text(
+            index.read_text(encoding="utf-8") + "- `specs/999-gone/spec.md`\n",
+            encoding="utf-8",
+        )
+        self.assertIn("STALE_INDEX", self._codes())
+        handoff = self.root / "handoff.md"
+        handoff.write_text(
+            handoff.read_text(encoding="utf-8") * 2, encoding="utf-8"
+        )
+        self.assertIn("INVALID_HANDOFF", self._codes())
+
     def test_operational_state_and_checkmarks_do_not_change_digest(self):
         tasks = self.feature / "tasks.md"
         tasks.write_text(
@@ -72,6 +111,26 @@ class HarnessStateTests(unittest.TestCase):
         self.assertEqual(hashlib.sha256(canonical_bytes(tasks)).hexdigest(), expected)
         tasks.write_text(tasks.read_text(encoding="utf-8").replace("None", "TASK-002"))
         self.assertNotEqual(hashlib.sha256(canonical_bytes(tasks)).hexdigest(), expected)
+
+    def test_four_column_task_order_status_is_operational(self):
+        tasks = self.feature / "tasks.md"
+        tasks.write_text(
+            "# Tasks\n**Estado:** APPROVED\n"
+            "| Orden | Tarea | Depende de | Estado |\n"
+            "| 1 | TASK-001 | ninguna | TODO |\n",
+            encoding="utf-8",
+        )
+        before = hashlib.sha256(canonical_bytes(tasks)).hexdigest()
+        tasks.write_text(
+            tasks.read_text(encoding="utf-8").replace("| TODO |", "| IN_PROGRESS |"),
+            encoding="utf-8",
+        )
+        self.assertEqual(hashlib.sha256(canonical_bytes(tasks)).hexdigest(), before)
+        tasks.write_text(
+            tasks.read_text(encoding="utf-8").replace("ninguna", "TASK-002"),
+            encoding="utf-8",
+        )
+        self.assertNotEqual(hashlib.sha256(canonical_bytes(tasks)).hexdigest(), before)
 
     def test_requirement_state_is_not_operational_metadata(self):
         self.spec.write_text(
@@ -127,9 +186,32 @@ class HarnessStateTests(unittest.TestCase):
         self.assertIn("INVALID_STATE", self._codes())
 
     def test_legacy_is_not_promoted_to_new_approval(self):
+        (self.root / "docs/audit-history.md").write_text(
+            "Source audit marker\n", encoding="utf-8"
+        )
+        transition = self.root / "specs/007-chat-independent-state"
+        transition.mkdir()
+        (transition / "decisions.json").write_text(
+            '{"schema_version": 1, "events": []}', encoding="utf-8"
+        )
         legacy = self.root / "specs" / "006-tdd-workflow"
         legacy.mkdir()
         (legacy / "spec.md").write_text("**Estado:** APPROVED\n", encoding="utf-8")
+        (legacy / "validation.md").write_text(
+            "**SPEC COMPLIANCE:** PASS\n**FEATURE STATUS:** VALIDATED\n",
+            encoding="utf-8",
+        )
+        handoff = self.root / "handoff.md"
+        handoff.write_text(
+            handoff.read_text(encoding="utf-8").replace(
+                '"validated": []', '"validated": ["SPEC-006"]'
+            ), encoding="utf-8"
+        )
+        index = self.root / "docs/index.md"
+        index.write_text(
+            index.read_text(encoding="utf-8") + "- `specs/006-tdd-workflow/validation.md`\n",
+            encoding="utf-8",
+        )
         self.assertEqual(self._codes(), set())
 
     def test_new_project_first_feature_requires_ledger(self):

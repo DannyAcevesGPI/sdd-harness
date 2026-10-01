@@ -14,6 +14,7 @@ DOCUMENT_STATES = {
 STATE_LINE = re.compile(r"^(\*\*Estado(?: actual)?:\*\* )(\S+)(\s*)$")
 CHECKBOX_LINE = re.compile(r"^(\s*- \[)[ xX](\] .*)$")
 ORDER_ROW = re.compile(r"^(\|\s*\d+\s*\|\s*TASK-\d{3}\s*\|\s*)(TODO|IN_PROGRESS|BLOCKED|DONE)(\s*\|.*)$")
+ORDER_ROW_FOUR = re.compile(r"^(\|\s*\d+\s*\|\s*TASK-\d{3}\s*\|[^|]*\|\s*)(TODO|IN_PROGRESS|BLOCKED|DONE)(\s*\|.*)$")
 HEX_DIGEST = re.compile(r"[0-9a-f]{64}")
 FEATURE_DIR = re.compile(r"^(\d{3})-[a-z0-9-]+$")
 LEGACY_FEATURES = frozenset({
@@ -24,6 +25,10 @@ LEGACY_FEATURES = frozenset({
     "005-harness-changelog",
     "006-tdd-workflow",
 })
+HANDOFF_BLOCK = re.compile(r"```json harness-state\s*\n(.*?)\n```", re.DOTALL)
+INDEX_ARTIFACT = re.compile(r"specs/[0-9]{3}-[a-z0-9-]+/(?:spec|plan|tasks|validation)\.md")
+SPEC_RESULT = re.compile(r"(?im)^\*{0,2}SPEC Compliance:\*{0,2}\s*(PASS|FAIL)\s*$")
+FEATURE_RESULT = re.compile(r"(?im)^\*{0,2}Feature Status:\*{0,2}\s*(VALIDATED|BLOCKED|IN_PROGRESS)\s*$")
 
 
 @dataclass(frozen=True)
@@ -63,6 +68,10 @@ def canonical_bytes(path: Path) -> bytes:
         order_row = ORDER_ROW.fullmatch(content) if path.name == "tasks.md" else None
         if order_row:
             content = f"{order_row.group(1)}<STATE>{order_row.group(3)}"
+        four_column = ORDER_ROW_FOUR.fullmatch(content) if path.name == "tasks.md" else None
+        if four_column:
+            # Preserve the v1 approved TODO baseline while normalizing later task progress.
+            content = f"{four_column.group(1)}TODO{four_column.group(3)}"
         normalized.append(content + ending)
     return "".join(normalized).encode("utf-8")
 
@@ -101,16 +110,98 @@ def _document_state(path: Path, issues: list[Issue]) -> str | None:
     return states[0] if states else None
 
 
+def projected_state(root: Path) -> tuple[dict, set[str]]:
+    active = []
+    validated = []
+    links = set()
+    for feature in sorted((root / "specs").iterdir()):
+        match = FEATURE_DIR.fullmatch(feature.name)
+        if not match or not feature.is_dir() or feature.is_symlink():
+            continue
+        prefix = f"specs/{feature.name}/"
+        validation = feature / "validation.md"
+        if validation.is_file():
+            report = validation.read_text(encoding="utf-8")
+            spec_results = SPEC_RESULT.findall(report)
+            feature_results = FEATURE_RESULT.findall(report)
+            if spec_results and feature_results and spec_results[-1].upper() == "PASS" and feature_results[-1].upper() == "VALIDATED":
+                validated.append(f"SPEC-{match.group(1)}")
+                links.add(prefix + "validation.md")
+                continue
+        files = [feature / name for name in ("spec.md", "plan.md", "tasks.md")]
+        present = [path for path in files if path.is_file()]
+        if not present:
+            continue
+        links.update(prefix + path.name for path in present)
+        spec_state = _document_state(files[0], []) if files[0].is_file() else None
+        plan_state = _document_state(files[1], []) if files[1].is_file() else None
+        task_state = _document_state(files[2], []) if files[2].is_file() else None
+        if task_state == "COMPLETED":
+            phase, next_action = "VALIDATE", "/validate"
+        elif task_state in {"APPROVED", "IN_PROGRESS"}:
+            phase, next_action = "IMPLEMENT", "/implement"
+        elif task_state == "IN_REVIEW":
+            phase, next_action = "TASKS", "approve TASKS"
+        elif task_state == "DRAFT":
+            phase, next_action = "TASKS", "/tasks"
+        elif plan_state == "APPROVED":
+            phase, next_action = "TASKS", "/tasks"
+        elif plan_state == "IN_REVIEW":
+            phase, next_action = "PLAN", "approve PLAN"
+        elif plan_state == "DRAFT":
+            phase, next_action = "PLAN", "/plan"
+        elif spec_state == "APPROVED":
+            phase, next_action = "PLAN", "/plan"
+        elif spec_state == "IN_REVIEW":
+            phase, next_action = "SPEC", "approve SPEC"
+        else:
+            phase, next_action = "SPEC", "/specify"
+        active.append({"id": f"SPEC-{match.group(1)}", "phase": phase, "next": next_action})
+    return {"schema_version": 1, "active": active, "validated": validated}, links
+
+
+def _audit_projection(root: Path, issues: list[Issue]) -> None:
+    expected, links = projected_state(root)
+    handoff = root / "handoff.md"
+    if not handoff.is_file():
+        _issue(issues, "INVALID_HANDOFF", handoff, "Missing live handoff")
+    else:
+        blocks = HANDOFF_BLOCK.findall(handoff.read_text(encoding="utf-8"))
+        if len(blocks) != 1:
+            _issue(issues, "INVALID_HANDOFF", handoff, f"Expected one json harness-state block, found {len(blocks)}")
+        else:
+            try:
+                actual = json.loads(blocks[0])
+            except json.JSONDecodeError as exc:
+                _issue(issues, "INVALID_HANDOFF", handoff, str(exc))
+            else:
+                if actual != expected:
+                    _issue(issues, "STALE_HANDOFF", handoff, f"Expected {json.dumps(expected, sort_keys=True)}")
+    index = root / "docs" / "index.md"
+    if not index.is_file():
+        _issue(issues, "STALE_INDEX", index, "Missing documentation index")
+    else:
+        actual_links = set(INDEX_ARTIFACT.findall(index.read_text(encoding="utf-8")))
+        for missing in sorted(links - actual_links):
+            _issue(issues, "STALE_INDEX", index, f"Missing link: {missing}")
+        for extra in sorted(actual_links - links):
+            _issue(issues, "STALE_INDEX", index, f"Obsolete link: {extra}")
+
+
 def audit_repository(root: Path) -> list[Issue]:
     root = root.resolve()
     issues: list[Issue] = []
     specs = root / "specs"
     if not specs.is_dir():
         return [Issue("MISSING_SPECS", str(specs), "specs directory not found")]
+    legacy_context = (
+        (root / "docs" / "audit-history.md").is_file()
+        and (specs / "007-chat-independent-state" / "decisions.json").is_file()
+    )
 
     for feature in sorted(specs.iterdir()):
         match = FEATURE_DIR.fullmatch(feature.name)
-        if not feature.is_dir() or not match or feature.name in LEGACY_FEATURES:
+        if not feature.is_dir() or not match or (legacy_context and feature.name in LEGACY_FEATURES):
             continue
         if feature.is_symlink() or not feature.resolve().is_relative_to(root):
             _issue(issues, "INVALID_FEATURE", feature, "Feature must be inside repository")
@@ -196,6 +287,7 @@ def audit_repository(root: Path) -> list[Issue]:
                 _issue(issues, "HASH_MISMATCH", artifact, f"{label} approved different content")
         for artifact in required - approvals.keys():
             _issue(issues, "MISSING_APPROVAL", artifact, "Gate state has no approval event")
+    _audit_projection(root, issues)
     return issues
 
 

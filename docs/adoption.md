@@ -3,21 +3,22 @@
 Guia para usar este SDD Harness en un proyecto nuevo sin arrastrar historia,
 evidencia ni decisiones locales de este repositorio.
 
-## 1. Que copiar
+## 1. Instalar la base reusable
 
-Copia la base del Harness:
+Requiere Python 3 compatible con el checker (3.10+). Desde este repositorio:
 
-```text
-.spec/
-AGENTS.md
-docs/quickstart.md
-docs/index.md
-docs/tdd.md
-docs/agents/
+```bash
+python3 src/adopt_harness.py --list
+python3 src/adopt_harness.py /ruta/al/proyecto
 ```
 
-Opcionalmente copia `README.md` como referencia editorial, pero adaptalo al
-producto real del proyecto destino.
+El destino debe existir. La lista de `--list` es la misma allowlist que usa
+la copia y sus pruebas: `.spec/`, `AGENTS.md`, guias de bootstrap/adopcion,
+checker, adoptador y tests del Harness. La CLI crea `handoff.md`,
+`docs/index.md` y `specs/` limpios; falla ante colisiones o symlinks en rutas
+de copia. No copia README, CHANGELOG, SPEC, validaciones ni auditorias locales.
+El workflow GitHub de este repo no es parte del nucleo portable; adaptalo
+solo si el destino usa GitHub Actions.
 
 ## 2. Que adaptar
 
@@ -53,13 +54,15 @@ propio estado, evidencia y validaciones.
 
 ## 4. Inicializar un proyecto nuevo
 
-1. Copia la base reusable indicada en la seccion 1.
-2. Crea un `handoff.md` nuevo y breve con el estado inicial del proyecto.
+1. Ejecuta la CLI de la seccion 1 sobre el proyecto destino.
+2. Conserva el `handoff.md` e indice nuevos; no copies los de este repo.
 3. Deja `specs/` vacio o con un `.gitkeep` si necesitas versionar la carpeta.
 4. Revisa `.spec/constitution.md` y confirma que el equipo acepta los gates.
 5. Ajusta standards al stack real.
 6. Actualiza README e indice documental.
-7. Haz un commit base antes de iniciar la primera feature.
+7. Ejecuta `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python3 -m unittest discover -s tests`
+   y `python3 src/check_harness_state.py` desde el destino; deben pasar.
+8. Haz un commit base antes de iniciar la primera feature.
 
 `handoff.md` debe funcionar como estado vivo: resumen actual, enlaces a evidencia
 y bloqueos activos. El detalle largo debe vivir en `docs/` o en la carpeta de la
@@ -70,17 +73,24 @@ feature correspondiente.
 Para una nueva funcionalidad:
 
 1. Idea o solicitud humana.
-2. Ejecuta `/specify` y crea `specs/<feature-id>/spec.md`.
+2. Ejecuta `/specify` y crea `specs/<feature-id>/spec.md` junto con
+   `decisions.json` con `{"schema_version": 1, "events": []}`.
 3. Resuelve aclaraciones con `/clarify` si hay ambiguedad.
-4. Obtén aprobacion humana de SPEC.
+4. Obtén aprobacion humana de SPEC, registra evento y huella, y ejecuta el
+   checker antes de `/plan`.
 5. Ejecuta `/plan` y crea `plan.md`.
-6. Obtén aprobacion humana de PLAN.
+6. Obtén aprobacion humana de PLAN, registra evento y ejecuta el checker.
 7. Ejecuta `/tasks` y crea `tasks.md`.
-8. Obtén aprobacion humana de TASKS.
+8. Obtén aprobacion humana de TASKS, registra evento y ejecuta el checker.
 9. Ejecuta `/implement` siguiendo tareas y dependencias.
 10. Registra evidencia en `specs/<feature-id>/evidence/`.
 11. Cierra TASKS como `COMPLETED`.
 12. Ejecuta `/validate` y crea `validation.md`.
+
+El ledger y solo estado/enlaces de handoff/indice se pueden actualizar antes
+de `/implement`; no codigo ni pruebas. Ver
+[`docs/state-reconstruction.md`](state-reconstruction.md) para calcular huellas
+y resolver gates. No uses decisiones sinteticas de tests como aprobacion real.
 
 La regla operativa se mantiene:
 
@@ -120,6 +130,7 @@ a las herramientas disponibles en el proyecto destino.
 ## 8. Checklist de adopcion
 
 - [ ] Base reusable copiada.
+- [ ] Checker y suite pasan en el destino limpio.
 - [ ] `handoff.md` nuevo creado.
 - [ ] Evidencia historica no copiada como estado propio.
 - [ ] Standards ajustados al stack.

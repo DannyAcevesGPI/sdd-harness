@@ -683,6 +683,8 @@ Para features nuevas, registrar la decisión humana y la huella del contenido
 autorizado de PLAN en `decisions.json` siguiendo
 `docs/state-reconstruction.md`. Ejecutar el comprobador local antes de
 generar TASKS; un fallo de procedencia o huella bloquea el gate.
+Durante `/plan`, se permite modificar ese ledger y solo estado/enlaces de
+`handoff.md` y `docs/index.md`; código y pruebas siguen fuera de alcance.
 
 ---
 

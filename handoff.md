@@ -2,6 +2,10 @@
 
 Fecha de actualización: 2026-09-30.
 
+```json harness-state
+{"schema_version": 1, "active": [], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008"]}
+```
+
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese
 detalle se consulta bajo demanda en `docs/audit-history.md`, `specs/` y Git.
 
@@ -115,6 +119,16 @@ FEATURE STATUS: VALIDATED
 - `specs/007-chat-independent-state/decisions.json`
 - `docs/state-reconstruction.md`
 
+## SPEC-008 — Adopción portable del Harness
+
+```text
+SPEC COMPLIANCE: PASS
+FEATURE STATUS: VALIDATED
+```
+
+- `specs/008-portable-harness-adoption/validation.md`
+- `specs/008-portable-harness-adoption/evidence/implementation.md`
+
 ---
 
 # 4. Reglas operativas vigentes
@@ -132,10 +146,16 @@ FEATURE STATUS: VALIDATED
 
 # 5. Próximo trabajo
 
-No hay feature activa ni bloqueos conocidos. La siguiente modificación deberá
-iniciar con `/specify` o revisar un artefacto existente según su nivel dueño.
-Para reconstruir el estado sin chat, seguir `docs/state-reconstruction.md` y
-ejecutar `python3 src/check_harness_state.py`.
+No hay feature SDD activa.
+
+```text
+Bloqueos conocidos: 0
+Próxima acción: /specify ante una nueva solicitud
+```
+
+El permiso de ledger y proyecciones por fase ya está incorporado a `AGENTS.md`
+y commands. Verificar gates con `decisions.json` y
+`python3 src/check_harness_state.py`.
 
 Antes de iniciar una nueva modificación:
 

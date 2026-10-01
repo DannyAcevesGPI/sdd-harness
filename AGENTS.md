@@ -72,7 +72,9 @@ Transiciones a `APPROVED` requieren aprobación humana explícita. No autoaproba
 
 # 5. Mutation Boundary
 
-Antes de `/implement`, solo modificar artefactos permitidos por la fase:
+Antes de `/implement`, solo modificar el artefacto de fase, el
+`decisions.json` de la feature y proyecciones de estado/enlaces en
+`handoff.md` y `docs/index.md`:
 
 - `/specify` y `/clarify`: SPEC
 - `/plan`: PLAN
@@ -80,7 +82,10 @@ Antes de `/implement`, solo modificar artefactos permitidos por la fase:
 - `/implement`: cambios autorizados por SPEC/PLAN/TASKS
 - `/validate`: reporte de validación
 
-Cambios de estado/evidencia que no alteran trabajo autorizado no requieren nuevo approval gate.
+Crear `decisions.json` vacío junto con la SPEC; registrar aprobaciones
+solo tras decisión humana explícita. Estos permisos operativos no autorizan
+código, pruebas ni contenido sustantivo antes de `/implement`. Cambios de
+estado/evidencia que no alteran trabajo autorizado no requieren nuevo gate.
 
 ---
 

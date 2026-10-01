@@ -44,13 +44,13 @@ Verifica:
 ## 4. Dónde buscar detalle
 
 - Índice documental: `docs/index.md`
-- Historia auditada compacta: `docs/audit-history.md`
+- Adopción en otro proyecto: `docs/adoption.md` y `python3 src/adopt_harness.py --list`
 - Subagentes: `docs/agents/subagents.md`
 - Hooks: `docs/agents/hooks.md`
-- Feature de prueba validada: `specs/001-audit-task-management/`
-- Optimización operativa validada: `specs/002-agent-operating-readiness/`
-- Optimización de contexto: `specs/003-context-window-optimization/`
 - Registro durable y bootstrap sin chat: `docs/state-reconstruction.md`
+
+La referencia extensa y la historia del proyecto fuente, si existen, se
+encuentran desde `docs/index.md`; no forman parte del paquete portable.
 
 ## 5. Evidencia
 
