@@ -61,3 +61,20 @@ specs/<feature-id>/evidence/
 ```
 
 `handoff.md` solo debe resumir estado vivo y enlazar evidencia.
+
+## 6. Ejecutar tareas con effort ajustado
+
+Para elegir `low`, `medium` o `high` según la descripción y despachar al CLI
+instalado, usa el punto de entrada común:
+
+```bash
+python3 src/run_task.py --agent claude --model MODEL --task-file specs/FEATURE/evidence/task.md
+python3 src/run_task.py --agent codex --model MODEL --task "describe the task"
+python3 src/run_task.py --agent opencode --model PROVIDER/MODEL --task-file specs/FEATURE/evidence/task.md
+```
+
+Agentes aceptados: `claude`, `codex` y `opencode`. `--dry-run` muestra las
+opciones sin revelar el texto. La selección automática solo se aplica cuando
+se inicia la tarea por este runner; ejecutar directamente un CLI usa su
+configuración nativa. Consulta `docs/agents/model-effort.md` para clasificación,
+fallback y límites de compatibilidad.

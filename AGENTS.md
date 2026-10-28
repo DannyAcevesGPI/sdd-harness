@@ -163,6 +163,12 @@ No crear hooks ejecutables ni dependencias sin SPEC/PLAN/TASKS que lo autoricen.
 
 Guía: `docs/agents/hooks.md`.
 
+# 11.1 Selección de effort por tarea
+
+Para ejecutar una tarea con selección automática del nivel de reasoning
+effort, usa `python3 src/run_task.py`. Consulta `docs/agents/model-effort.md`
+para los controles disponibles y sus límites por runtime/modelo.
+
 ---
 
 # 12. Definition Of Done

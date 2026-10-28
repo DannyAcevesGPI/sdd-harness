@@ -13,10 +13,15 @@ BASE_FILES = (
     Path("docs/tdd.md"),
     Path("docs/agents/hooks.md"),
     Path("docs/agents/subagents.md"),
+    Path("docs/agents/model-effort.md"),
     Path("src/adopt_harness.py"),
     Path("src/check_harness_state.py"),
+    Path("src/effort_policy.py"),
+    Path("src/run_task.py"),
     Path("tests/test_adopt_harness.py"),
     Path("tests/test_check_harness_state.py"),
+    Path("tests/test_effort_policy.py"),
+    Path("tests/test_run_task.py"),
 )
 SPEC_FILES = (
     Path(".spec/constitution.md"),
@@ -92,6 +97,8 @@ def adopt(source: Path, destination: Path) -> tuple[Path, ...]:
         "- `handoff.md` - live state\n"
         "- `docs/quickstart.md` - bootstrap\n"
         "- `docs/adoption.md` - adoption\n"
+        "- `src/run_task.py` - task runner with effort selection\n"
+        "- `docs/agents/model-effort.md` - effort policy and runtime limits\n"
         "- `docs/state-reconstruction.md` - gates without chat\n",
         encoding="utf-8",
     )

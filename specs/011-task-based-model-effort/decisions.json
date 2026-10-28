@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "events": [
+    {
+      "id": "DECISION-001",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-27",
+      "decision": "Aclarar que SPEC-011 debe ser portable entre proveedores de modelos y runtimes de agentes",
+      "scope": "Q-001 de SPEC-011: incluir Anthropic, DeepSeek, GLM y otros proveedores, y Claude Code, Codex y OpenCode; usar el valor predeterminado e informar si la combinación no permite ajustar effort",
+      "artifact": "specs/011-task-based-model-effort/spec.md",
+      "source": "Aclaración humana explícita recibida el 2026-10-27 y propagada a FR-001 a FR-003, NFR-002 y AC-001 a AC-003"
+    },
+    {
+      "id": "DECISION-002",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-27",
+      "decision": "Aprobada SPEC-011 v0.1.0",
+      "scope": "Ajuste de reasoning effort por tarea con portabilidad entre runtimes Claude Code, Codex y OpenCode y proveedores Anthropic, DeepSeek, GLM y otros compatibles; autoriza preparar PLAN-011",
+      "artifact": "specs/011-task-based-model-effort/spec.md",
+      "artifact_sha256": "bd213c7b83bee1afc3a35ad9f8ccb82beeb45f10aebb704a6e245192172198c4",
+      "source": "Aprobación humana explícita: «Ok lo apruebo»"
+    },
+    {
+      "id": "DECISION-003",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-27",
+      "decision": "Aprobado PLAN-011 v0.1.0",
+      "scope": "Diseño técnico de política de effort y ejecución por adaptadores CLI para Claude Code, Codex y OpenCode; autoriza preparar TASKS-011",
+      "artifact": "specs/011-task-based-model-effort/plan.md",
+      "artifact_sha256": "63757c1dedd4b7fa60f6577659ea8449992558ca1cab41ffc23bc6ba5d19686e",
+      "source": "Aprobación humana explícita: «Lo revisé y apruebo el plan»"
+    },
+    {
+      "id": "DECISION-004",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-27",
+      "decision": "Aprobadas TASKS-011 v0.1.0",
+      "scope": "Ejecución de TASK-001 a TASK-006 para SPEC-011, en dependencias y alcance definidos en TASKS-011",
+      "artifact": "specs/011-task-based-model-effort/tasks.md",
+      "artifact_sha256": "a312e71bd5969c8ff51b3ad55eb112307a8b9ccca7ebf8e908be2b87e024c4e5",
+      "source": "Aprobación humana explícita: «Esta aprobada»"
+    }
+  ]
+}

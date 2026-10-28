@@ -137,3 +137,21 @@ a las herramientas disponibles en el proyecto destino.
 - [ ] README e indice actualizados.
 - [ ] Primer SPEC creado antes de implementar.
 - [ ] Secretos y datos sensibles excluidos.
+
+## 9. Ejecución portable con reasoning effort
+
+La adopción incluye `src/run_task.py`, `src/effort_policy.py` y la guía
+`docs/agents/model-effort.md`. Para selección automática, inicia la tarea con
+el runner e indica runtime, modelo y texto o archivo:
+
+```bash
+python3 src/run_task.py --agent claude --model MODEL --task "Describe la tarea"
+python3 src/run_task.py --agent codex --model MODEL --task-file ruta/dentro/del/proyecto.md
+python3 src/run_task.py --agent opencode --model PROVIDER/MODEL --task "Describe la tarea"
+```
+
+No requiere configurar credenciales en el Harness; cada CLI usa su propia
+autenticación, modelo y permisos. Si la opción no es compatible y el CLI lo
+indica explícitamente, el runner reintenta una vez con el valor predeterminado.
+La llamada directa a un CLI no pasa por esta política. La guía documenta los
+detalles y los límites conocidos por runtime/modelo.

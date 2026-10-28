@@ -42,9 +42,18 @@ Consultar solo cuando aplique al trabajo:
 - [`docs/tdd.md`](tdd.md) — ciclo TDD y evidencia por tarea.
 - `docs/agents/subagents.md`
 - `docs/agents/hooks.md`
+- `docs/agents/model-effort.md` — política común y límites por CLI/modelo.
+- `src/run_task.py` — punto de entrada opcional para seleccionar effort y ejecutar una tarea.
 - [`docs/state-reconstruction.md`](state-reconstruction.md) — registro durable y bootstrap sin chat.
 
 ## Evidencia y features
+
+### Feature activa
+
+- `specs/011-task-based-model-effort/spec.md` — SPEC APPROVED; incluye portabilidad entre proveedores y runtimes de agentes.
+- `specs/011-task-based-model-effort/plan.md` — PLAN APPROVED; propone un ejecutor CLI con adaptadores nativos.
+- `specs/011-task-based-model-effort/tasks.md` — TASKS COMPLETED; validación BLOCKED por smokes reales y benchmark pendientes.
+- `specs/011-task-based-model-effort/decisions.json` — aclaración Q-001 y aprobaciones de SPEC/PLAN/TASKS registradas.
 
 Las aprobaciones de SPEC-001 a SPEC-006 que dependen del chat se tratan como
 legado no verificable, sin cambiar sus validaciones.

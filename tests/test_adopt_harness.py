@@ -47,6 +47,25 @@ class AdoptionTests(unittest.TestCase):
             if not path.endswith("/"):
                 self.assertTrue((self.destination / path).exists(), path)
 
+    def test_effort_runner_is_shipped_and_documented(self):
+        required = {
+            Path("src/effort_policy.py"),
+            Path("src/run_task.py"),
+            Path("tests/test_effort_policy.py"),
+            Path("tests/test_run_task.py"),
+            Path("docs/agents/model-effort.md"),
+        }
+        self.assertTrue(required.issubset(set(reusable_files(SOURCE))))
+        adopt(SOURCE, self.destination)
+        for relative in required:
+            self.assertTrue((self.destination / relative).is_file(), relative)
+        for relative in (Path("AGENTS.md"), Path("docs/quickstart.md"), Path("docs/adoption.md"), Path("docs/index.md")):
+            content = (self.destination / relative).read_text(encoding="utf-8")
+            self.assertIn("run_task.py", content, relative)
+        policy = (self.destination / "docs/agents/model-effort.md").read_text(encoding="utf-8")
+        for agent in ("claude", "codex", "opencode"):
+            self.assertIn(agent.lower(), policy.lower())
+
     def test_rejects_collisions_without_partial_copy(self):
         (self.destination / "AGENTS.md").write_text("existing", encoding="utf-8")
         with self.assertRaises(ValueError):
