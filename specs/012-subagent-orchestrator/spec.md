@@ -1,8 +1,8 @@
 # Especificación: Orquestador de subagentes con modelo y effort por tarea
 
 **ID:** SPEC-012
-**Estado:** DRAFT
-**Versión:** 0.1.0
+**Estado:** IN_REVIEW
+**Versión:** 0.2.0
 **Fecha:** 2026-10-28
 
 # 1. Resumen
@@ -78,9 +78,9 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 
 ## FR-004 — Catálogo de modelos y fallback
 
-**Descripción:** El Harness solo debe asignar modelos incluidos en el catálogo declarado por el usuario. Si el modelo o el effort seleccionado no está disponible en la combinación activa, debe continuar con la configuración predeterminada del runtime e informar la limitación, sin afirmar un cambio no confirmado.
+**Descripción:** El Harness solo debe asignar modelos incluidos en el catálogo que el usuario declara en un archivo del proyecto; si ese catálogo no existe, no cambia de modelo y usa el configurado en el runtime. Si el modelo o el effort seleccionado no está disponible en la combinación activa, debe continuar con la configuración predeterminada del runtime e informar la limitación, sin afirmar un cambio no confirmado.
 **Prioridad:** MUST
-**Origen:** Restricciones de SPEC-011 y Artículo X de la Constitución.
+**Origen:** Restricciones de SPEC-011, Artículo X de la Constitución y aclaración Q-002 del 2026-10-28.
 
 ## FR-005 — Ejecución de TASKS hasta un punto de detención
 
@@ -129,8 +129,8 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 ## NFR-001 — Reducción de consumo de tokens
 
 **Categoría:** Rendimiento
-**Descripción:** Completar la implementación de una feature de referencia en modo orquestado debe consumir menos tokens totales que la línea base de un solo agente con modelo y effort uniformes.
-**Métrica o condición:** [NEEDS CLARIFICATION] Umbral de reducción y feature de referencia; ver Q-001.
+**Descripción:** Completar la implementación de una feature de referencia en modo orquestado debe consumir al menos 30 % menos tokens totales que la línea base de un solo agente con modelo y effort uniformes.
+**Métrica o condición:** (tokens línea base − tokens orquestado) / tokens línea base ≥ 0,30, medido sobre las mismas TASK; la feature de referencia y el procedimiento de medición se definen en PLAN (Q-001).
 
 ## NFR-002 — Portabilidad
 
@@ -176,7 +176,7 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 
 ## BR-001 — Catálogo declarado por el usuario
 
-**Regla:** El usuario declara qué modelos puede usar cada nivel en cada runtime; el Harness no incorpora modelos por su cuenta.
+**Regla:** El usuario declara en un archivo del proyecto qué modelos puede usar cada nivel en cada runtime; el Harness no trae catálogo por defecto ni incorpora modelos por su cuenta. Sin catálogo declarado no hay cambio de modelo.
 
 ## BR-002 — Piso para trabajo de alto impacto
 
@@ -370,7 +370,7 @@ El comportamiento es el mismo que antes de esta feature y `python3 src/check_har
 
 ### Given
 
-La feature de referencia y la línea base definidas en Q-001.
+La feature de referencia y la línea base definidas en PLAN conforme a Q-001.
 
 ### When
 
@@ -378,7 +378,7 @@ Se ejecuta la implementación en modo orquestado y en línea base.
 
 ### Then
 
-El consumo total orquestado cumple el umbral de Q-001 y la comparación queda en la evidencia.
+El consumo total orquestado es al menos 30 % menor que el de la línea base y la comparación queda en la evidencia.
 
 ## AC-013 — Escalamiento único
 
@@ -411,7 +411,7 @@ Hay como máximo un reintento con nivel superior del catálogo y ambos intentos 
 ## EDGE-003 — Catálogo vacío o inválido
 
 **Condición:** El usuario no declaró catálogo o declaró uno inconsistente.
-**Comportamiento esperado:** Se usa la configuración predeterminada del runtime para todas las delegaciones y se informa; no se inventan modelos.
+**Comportamiento esperado:** No se cambia de modelo: se usa el modelo configurado en el runtime para todas las delegaciones (el effort sigue aplicándose según SPEC-011) y se informa; no se inventan modelos.
 
 ## EDGE-004 — Conflicto de archivos entre delegaciones paralelas
 
@@ -439,7 +439,7 @@ Información requerida: campos de FR-008, fecha e intento. Reglas relevantes: vi
 
 ## Catálogo de modelos
 
-Información requerida: runtime, nivel y modelo permitido. Reglas relevantes: declarado por el usuario (BR-001).
+Información requerida: runtime, nivel y modelo permitido. Reglas relevantes: declarado por el usuario en un archivo del proyecto (BR-001); su ubicación y formato se definen en PLAN.
 
 # 11. Dependencias
 
@@ -468,27 +468,27 @@ Los niveles de modelo se expresan como clases comunes portables (por ejemplo eco
 
 ## Q-001 — Meta de reducción de tokens
 
-**Estado:** [NEEDS CLARIFICATION]
+**Estado:** [CLARIFIED]
 **Pregunta:** ¿Qué reducción mínima de tokens debe demostrar el modo orquestado y contra qué feature de referencia se mide?
 **Contexto:** El objetivo principal es bajar consumo; NFR-001 de SPEC-011 quedó sin métrica y hoy bloquea su validación.
 **Impacto:** NFR-001, AC-012.
 **Bloqueante:** YES
 **Opciones conocidas:** (a) ≥ 30 % menos tokens totales; (b) ≥ 20 %; (c) solo medir y reportar, sin umbral. Referencia: re-ejecutar las TASK de una feature ya validada o una feature sintética de prueba.
-**Respuesta:** [PENDIENTE]
-**Resuelto por:** [PENDIENTE]
-**Fecha de resolución:** [PENDIENTE]
+**Respuesta:** Opción (a): al menos 30 % menos tokens totales frente a la línea base. La elección de la feature de referencia y el procedimiento de medición son técnicos y se definen en PLAN. Propagado a NFR-001 y AC-012.
+**Resuelto por:** Usuario responsable del proyecto
+**Fecha de resolución:** 2026-10-28
 
 ## Q-002 — Origen del catálogo de modelos
 
-**Estado:** [NEEDS CLARIFICATION]
+**Estado:** [CLARIFIED]
 **Pregunta:** ¿Quién define qué modelo corresponde a cada nivel en cada runtime?
 **Contexto:** Cambiar de modelo afecta costo, calidad y proveedores; el Harness no debe inventar integraciones.
 **Impacto:** FR-003, FR-004, BR-001, AC-003, AC-004.
 **Bloqueante:** YES
 **Opciones conocidas:** (a) el usuario declara el catálogo en un archivo del proyecto y sin él no se cambia de modelo; (b) el Harness trae un catálogo por defecto editable por el usuario.
-**Respuesta:** [PENDIENTE]
-**Resuelto por:** [PENDIENTE]
-**Fecha de resolución:** [PENDIENTE]
+**Respuesta:** Opción (a): el usuario declara el catálogo en un archivo del proyecto; sin él no se cambia de modelo. Propagado a FR-004, BR-001, EDGE-003 y Datos involucrados.
+**Resuelto por:** Usuario responsable del proyecto
+**Fecha de resolución:** 2026-10-28
 
 ## Q-003 — Paralelismo en esta feature
 
@@ -548,13 +548,13 @@ Los niveles de modelo se expresan como clases comunes portables (por ejemplo eco
 # 16. Criterios para avanzar a planificación
 
 - [x] Problema, alcance, actores, FR/NFR/SEC/BR y casos límite aplicables definidos.
-- [ ] MUST con AC verificables y matriz consistente; sin aclaraciones bloqueantes.
+- [x] MUST con AC verificables y matriz consistente; sin aclaraciones bloqueantes.
 - [x] Suposiciones/restricciones visibles; no hay diseño innecesario.
 - [ ] SPEC aprobada por humano y decisión durable registrada.
 
 # 17. Estado de aprobación
 
-**Estado actual:** DRAFT
+**Estado actual:** IN_REVIEW
 
 Estados: `DRAFT → IN_REVIEW → APPROVED → SUPERSEDED`.
 

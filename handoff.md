@@ -3,7 +3,7 @@
 Fecha de actualización: 2026-10-28.
 
 ```json harness-state
-{"schema_version": 1, "active": [{"id": "SPEC-012", "phase": "SPEC", "next": "/specify"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
+{"schema_version": 1, "active": [{"id": "SPEC-012", "phase": "SPEC", "next": "approve SPEC"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
 ```
 
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese
@@ -168,12 +168,12 @@ FEATURE STATUS: VALIDATED
 # 5. Próximo trabajo
 
 SPEC-012 (orquestador de subagentes con modelo y effort por tarea) está en
-DRAFT con aclaraciones bloqueantes Q-001 y Q-002. FINDING-001/002 de SPEC-010
+IN_REVIEW; Q-001 y Q-002 aclaradas (DECISION-001/002), Q-003/Q-004 no bloqueantes. FINDING-001/002 de SPEC-010
 quedaron resueltos; SPEC-009 sigue revalidada tras DECISION-004.
 
 ```text
 Bloqueos conocidos: 0
-Próxima acción: resolver Q-001/Q-002 de SPEC-012 y revisar la SPEC
+Próxima acción: revisión y aprobación humana de SPEC-012
 ```
 
 El permiso de ledger y proyecciones por fase ya está incorporado a `AGENTS.md`
