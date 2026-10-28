@@ -2,8 +2,8 @@
 
 **ID:** PLAN-012
 **SPEC relacionada:** SPEC-012
-**Estado:** IN_REVIEW
-**Versión:** 0.1.0
+**Estado:** APPROVED
+**Versión:** 0.2.0
 **Fecha:** 2026-10-28
 
 # 1. Precondiciones
@@ -445,11 +445,11 @@ Sin cambios de formato en artefactos SDD existentes. `run_task.py` conserva su C
 
 ## Q-TECH-001 — Contabilidad de tokens en cache
 
-**Estado:** [NEEDS CLARIFICATION]
+**Estado:** [CLARIFIED]
 **Pregunta:** ¿Los tokens leídos de cache (`cache_read`) cuentan igual que el resto para la meta del 30 %?
 **Impacto:** DEC-011, AC-012. Contarlos favorece al modo orquestado, porque un agente único relee su contexto acumulado en cada turno; excluirlos mide solo tokens nuevos.
 **Bloqueante:** NO. Propuesta por defecto: contarlos (DEC-011) y reportar también el desglose sin cache.
-**Respuesta:** [PENDIENTE]
+**Respuesta:** De acuerdo con la propuesta: `cache_read` cuenta en el total para la meta del 30 % y el informe incluye además el desglose sin cache. Usuario responsable del proyecto, 2026-10-28.
 
 # 20. ADR requeridos
 
@@ -472,11 +472,11 @@ Sin cambios de formato en artefactos SDD existentes. `run_task.py` conserva su C
 
 - [x] SPEC aprobada; MUST cubiertos; diseño, archivos, datos/contratos aplicables definidos.
 - [x] Seguridad, pruebas/TDD, dependencias, compatibilidad, riesgos y ADR revisados.
-- [ ] Sin aclaraciones técnicas bloqueantes; aprobación humana de PLAN registrada.
+- [x] Sin aclaraciones técnicas bloqueantes; aprobación humana de PLAN registrada.
 
 # 23. Estado del plan
 
-**Estado actual:** IN_REVIEW
+**Estado actual:** APPROVED
 
 Estados: `DRAFT → IN_REVIEW → APPROVED → SUPERSEDED`.
 
@@ -484,7 +484,7 @@ Estados: `DRAFT → IN_REVIEW → APPROVED → SUPERSEDED`.
 
 Solo aprobación humana explícita permite `APPROVED`.
 
-**Aprobado por:** [PENDIENTE]
-**Fecha de aprobación:** [PENDIENTE]
-**Decisión explícita y alcance:** [PENDIENTE; contenido de la decisión humana.]
+**Aprobado por:** Usuario responsable del proyecto
+**Fecha de aprobación:** 2026-10-28
+**Decisión explícita y alcance:** «Apruebo PLAN-012, Q-TECH-001 de acuerdo con tu propuesta», respecto a PLAN-012 v0.2.0 con Q-TECH-001 resuelta según la propuesta; autoriza preparar TASKS-012.
 **Registro durable:** `specs/012-subagent-orchestrator/decisions.json` con huella antes de TASKS.

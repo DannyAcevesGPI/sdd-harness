@@ -51,6 +51,27 @@
       "artifact": "specs/012-subagent-orchestrator/spec.md",
       "artifact_sha256": "e1d4e73dfc0067dc48131705124c1f30cb8a0c0605ba5728084b697e1b37c93a",
       "source": "Aprobación humana explícita: «Listo, he revisado y queda autorizada la spec»"
+    },
+    {
+      "id": "DECISION-006",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-28",
+      "decision": "Aclarar Q-TECH-001 de PLAN-012: contabilidad de tokens en cache",
+      "scope": "DEC-011 y AC-012: cache_read cuenta en el total para la meta del 30 %; el informe incluye además el desglose sin cache",
+      "artifact": "specs/012-subagent-orchestrator/plan.md",
+      "source": "Aclaración humana explícita: «Q-TECH-001 de acuerdo con tu propuesta»"
+    },
+    {
+      "id": "DECISION-007",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-28",
+      "decision": "Aprobado PLAN-012 v0.2.0",
+      "scope": "Orquestación híbrida (command /orchestrate + helper determinista), subagentes CLI headless con modelo y effort por unidad, catálogo harness-models.json, verificación por snapshot, oleadas paralelas sin retrabajo, /validate orquestado y benchmark NFR-001; autoriza preparar TASKS-012",
+      "artifact": "specs/012-subagent-orchestrator/plan.md",
+      "artifact_sha256": "1b1f7c66e0f005368b5b2f9b78437382e514760d27e1d04c7f749995bf04b904",
+      "source": "Aprobación humana explícita: «Apruebo PLAN-012, Q-TECH-001 de acuerdo con tu propuesta»"
     }
   ]
 }
