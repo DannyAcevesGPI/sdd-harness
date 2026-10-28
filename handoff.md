@@ -168,7 +168,7 @@ FEATURE STATUS: VALIDATED
 # 5. Próximo trabajo
 
 SPEC-012 (orquestador de subagentes con modelo y effort por tarea) está en
-IN_REVIEW; Q-001 y Q-002 aclaradas (DECISION-001/002), Q-003/Q-004 no bloqueantes. FINDING-001/002 de SPEC-010
+IN_REVIEW; Q-001 a Q-004 aclaradas (DECISION-001 a 004). FINDING-001/002 de SPEC-010
 quedaron resueltos; SPEC-009 sigue revalidada tras DECISION-004.
 
 ```text

@@ -20,6 +20,26 @@
       "scope": "FR-004, BR-001 y EDGE-003: el usuario declara el catálogo de modelos por nivel y runtime en un archivo del proyecto; sin catálogo no se cambia de modelo",
       "artifact": "specs/012-subagent-orchestrator/spec.md",
       "source": "Aclaración humana explícita: «Q-002 opción a»"
+    },
+    {
+      "id": "DECISION-003",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-28",
+      "decision": "Aclarar Q-003 de SPEC-012: ejecución paralela",
+      "scope": "FR-010 pasa a SHOULD: paralelo cuando las TASK no dependen entre sí ni comparten archivos; en serie cuando el paralelo cause retrabajo (AC-014)",
+      "artifact": "specs/012-subagent-orchestrator/spec.md",
+      "source": "Aclaración humana explícita: «Si puede ejecutar en paralelo cuando se pueda sino es retrabajo»"
+    },
+    {
+      "id": "DECISION-004",
+      "kind": "DECISION",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-28",
+      "decision": "Aclarar Q-004 de SPEC-012: fases orquestadas",
+      "scope": "El orquestador cubre /implement y /validate (FR-001, FR-012, AC-015); /specify, /clarify, /plan y /tasks quedan fuera de la orquestación",
+      "artifact": "specs/012-subagent-orchestrator/spec.md",
+      "source": "Aclaración humana explícita: «el orquestador debe asumir implement y validate justamente, que son las implementaciones y testeos»"
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 **ID:** SPEC-012
 **Estado:** IN_REVIEW
-**Versión:** 0.2.0
+**Versión:** 0.3.0
 **Fecha:** 2026-10-28
 
 # 1. Resumen
@@ -27,6 +27,8 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 - Paquete de delegación con contexto mínimo y límites de mutación por unidad de trabajo.
 - Selección de modelo y reasoning effort por subagente según tipo y complejidad de la tarea.
 - Avance de las TASK aprobadas en orden de dependencias hasta completar TASKS, un bloqueo o una aclaración.
+- Ejecución paralela de TASK independientes cuando no genere retrabajo.
+- Delegación de las verificaciones de `/validate` con consolidación del reporte por el orquestador.
 - Resultado compacto de subagente y verificación del orquestador antes de marcar `DONE`.
 - Registro durable de modelo, effort y consumo por delegación.
 - Medición comparativa del consumo de tokens frente a una línea base.
@@ -38,6 +40,7 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 - Gestionar autenticación, claves, facturación o cuotas de proveedores.
 - Modificar el contenido aprobado de SPEC-011; esta feature lo reutiliza.
 - Optimización automática basada en evaluación de calidad de las respuestas.
+- Orquestar `/specify`, `/clarify`, `/plan` y `/tasks`; esas fases siguen el flujo habitual del agente principal.
 
 # 3. Actores
 
@@ -60,7 +63,7 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 
 ## FR-001 — Rol de orquestador
 
-**Descripción:** En modo orquestado, el agente principal debe determinar fase, gate y siguiente acción desde los artefactos del repositorio y delegar a subagentes la ejecución de las unidades de trabajo, sin ejecutar él mismo el trabajo delegado.
+**Descripción:** En modo orquestado, durante `/implement` y `/validate`, el agente principal debe determinar fase, gate y siguiente acción desde los artefactos del repositorio y delegar a subagentes la ejecución de las unidades de trabajo, sin ejecutar él mismo el trabajo delegado.
 **Prioridad:** MUST
 **Origen:** Petición del usuario del 2026-10-28.
 
@@ -112,17 +115,23 @@ Reducir el consumo de tokens necesario para completar una feature y mejorar la c
 **Prioridad:** SHOULD
 **Origen:** Petición del usuario (adaptar modelos a la tarea).
 
-## FR-010 — Ejecución paralela de TASK independientes
+## FR-010 — Ejecución paralela sin retrabajo
 
-**Descripción:** El orquestador puede delegar en paralelo TASK sin dependencias entre sí ni archivos compartidos.
-**Prioridad:** COULD
-**Origen:** Mejora de continuidad; ver Q-003.
+**Descripción:** El orquestador debe delegar en paralelo las TASK listas que no dependan entre sí ni modifiquen archivos en común; cuando el paralelismo pueda causar retrabajo (dependencias, archivos compartidos o resultado de una TASK necesario para otra), debe ejecutarlas en serie.
+**Prioridad:** SHOULD
+**Origen:** Aclaración Q-003 del 2026-10-28.
 
 ## FR-011 — Modo opcional y compatible
 
 **Descripción:** El flujo SDD sin orquestador debe seguir funcionando sin cambios; el modo orquestado es una opción del usuario.
 **Prioridad:** MUST
 **Origen:** Portabilidad del Harness (SPEC-008, SPEC-011).
+
+## FR-012 — Orquestación de `/validate`
+
+**Descripción:** Durante `/validate`, el orquestador debe delegar a subagentes las verificaciones (pruebas, comprobación de AC, revisión de seguridad y trazabilidad) y consolidar sus resultados en el reporte de validación; el veredicto `SPEC COMPLIANCE` y `FEATURE STATUS` lo emite el orquestador, no un subagente.
+**Prioridad:** MUST
+**Origen:** Aclaración Q-004 del 2026-10-28; guía de subagentes (un subagente no sustituye la validación final).
 
 # 5. Requisitos no funcionales
 
@@ -396,6 +405,38 @@ El orquestador reintenta.
 
 Hay como máximo un reintento con nivel superior del catálogo y ambos intentos quedan registrados; un fallo de autenticación o permisos no se reintenta.
 
+## AC-014 — Paralelo solo sin retrabajo
+
+**Relacionado con:** FR-010, EDGE-004
+
+### Given
+
+Tres TASK listas: dos sin dependencias ni archivos en común y una tercera que comparte archivos con una de ellas.
+
+### When
+
+El orquestador las delega.
+
+### Then
+
+Las dos independientes se ejecutan en paralelo y la tercera en serie después de la que comparte archivos.
+
+## AC-015 — Validación orquestada
+
+**Relacionado con:** FR-012
+
+### Given
+
+Una feature con TASKS `COMPLETED` en modo orquestado.
+
+### When
+
+Se ejecuta `/validate`.
+
+### Then
+
+Las verificaciones se delegan y quedan registradas (FR-008); el reporte de validación consolida sus resultados y el veredicto final lo emite el orquestador.
+
 # 9. Casos límite y escenarios de error
 
 ## EDGE-001 — Runtime sin subagentes nativos
@@ -458,7 +499,7 @@ Información requerida: runtime, nivel y modelo permitido. Reglas relevantes: de
 
 ## ASM-001
 
-Las unidades delegables son principalmente las TASK de `/implement`; en otras fases el orquestador puede delegar trabajo de solo lectura (búsqueda, revisión, verificación) respetando los permisos de mutación de la fase. Ver Q-004.
+Las unidades delegables son las TASK de `/implement` y las verificaciones de `/validate` (Q-004).
 
 ## ASM-002
 
@@ -492,27 +533,27 @@ Los niveles de modelo se expresan como clases comunes portables (por ejemplo eco
 
 ## Q-003 — Paralelismo en esta feature
 
-**Estado:** [NEEDS CLARIFICATION]
+**Estado:** [CLARIFIED]
 **Pregunta:** ¿La ejecución paralela de TASK independientes entra en esta versión?
 **Contexto:** Mejora el tiempo, no necesariamente los tokens, y añade riesgo de conflictos.
 **Impacto:** FR-010, EDGE-004.
 **Bloqueante:** NO
 **Opciones conocidas:** Mantener como COULD o moverla fuera de alcance.
-**Respuesta:** [PENDIENTE]
-**Resuelto por:** [PENDIENTE]
-**Fecha de resolución:** [PENDIENTE]
+**Respuesta:** Sí: ejecutar en paralelo cuando se pueda, salvo que cause retrabajo. Propagado a FR-010 (SHOULD), AC-014 y alcance.
+**Resuelto por:** Usuario responsable del proyecto
+**Fecha de resolución:** 2026-10-28
 
 ## Q-004 — Fases cubiertas
 
-**Estado:** [NEEDS CLARIFICATION]
+**Estado:** [CLARIFIED]
 **Pregunta:** ¿El orquestador solo cubre `/implement` (y apoyo a `/validate`) o también delega redacción de SPEC, PLAN y TASKS?
 **Contexto:** El mayor consumo está en implementación; la redacción de artefactos requiere juicio y contexto del usuario.
 **Impacto:** FR-001, FR-005, ASM-001.
 **Bloqueante:** NO
 **Opciones conocidas:** Según ASM-001, o ampliar a redacción delegada.
-**Respuesta:** [PENDIENTE]
-**Resuelto por:** [PENDIENTE]
-**Fecha de resolución:** [PENDIENTE]
+**Respuesta:** El orquestador asume `/implement` y `/validate` (implementación y pruebas). Propagado a FR-001, FR-012, AC-015, ASM-001 y alcance.
+**Resuelto por:** Usuario responsable del proyecto
+**Fecha de resolución:** 2026-10-28
 
 # 14.1 Ciclo de vida de una aclaración
 
@@ -531,8 +572,9 @@ Los niveles de modelo se expresan como clases comunes portables (por ejemplo eco
 | FR-007 | AC-007 | MUST |
 | FR-008 | AC-008 | MUST |
 | FR-009 | AC-013 | SHOULD |
-| FR-010 | — (EDGE-004) | COULD |
+| FR-010 | AC-014 | SHOULD |
 | FR-011 | AC-011 | MUST |
+| FR-012 | AC-015 | MUST |
 | NFR-001 | AC-012 | MUST |
 | NFR-002 | AC-003, AC-004, AC-010 | MUST |
 | NFR-003 | AC-007 | MUST |
