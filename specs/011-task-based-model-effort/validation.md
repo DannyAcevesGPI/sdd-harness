@@ -307,16 +307,16 @@ simulados; su aceptación real por combinación CLI/modelo sigue bloqueada.
 **Severity:** MEDIUM  
 **Related artifacts:** TASK-003, TEST-008  
 **Description:** `test_script_entrypoint_runs_dry_run_from_repository_root` requería el CLI `claude` real en `PATH`; falla en GitHub Actions.  
-**Evidence:** `evidence/finding-004.md`  
-**Status:** OPEN  
-**Required action:** Reabrir TASK-003 y hacer hermética la prueba con un CLI falso en `PATH`.
+**Evidence:** `evidence/finding-004.md`, `evidence/finding-004-resolution.md`  
+**Status:** RESOLVED  
+**Required action:** TASK-003 reabierta; la prueba usa un CLI falso en `PATH`; suite 72/72 PASS con y sin CLI instalados.
 
 # 21. Findings Summary
 
 | Severity | Open | Resolved |
 |----------|-----:|---------:|
 | HIGH | 1 | 0 |
-| MEDIUM | 0 | 2 |
+| MEDIUM | 0 | 3 |
 | LOW | 0 | 0 |
 
 Blocking findings: 1.

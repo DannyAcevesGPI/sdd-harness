@@ -3,7 +3,7 @@
 Fecha de actualización: 2026-10-28.
 
 ```json harness-state
-{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "IMPLEMENT", "next": "/implement"}, {"id": "SPEC-012", "phase": "TASKS", "next": "/tasks"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
+{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "VALIDATE", "next": "/validate"}, {"id": "SPEC-012", "phase": "TASKS", "next": "/tasks"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
 ```
 
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese
@@ -174,7 +174,8 @@ FEATURE STATUS: VALIDATED
 
 SPEC-011 y PLAN-011 están aprobados; TASKS-011 está COMPLETED. FINDING-001 de
 SPEC-011 quedó resuelto durante la validación. FINDING-002 mantiene SPEC-011
-BLOCKED hasta ejecutar smokes reales y benchmark.
+BLOCKED hasta ejecutar smokes reales y benchmark. FINDING-004 (prueba
+dependiente del CLI instalado, fallo de CI) quedó resuelto reabriendo TASK-003.
 
 SPEC-012 (orquestador de subagentes con modelo y effort por tarea) está
 APPROVED (v0.3.0, DECISION-005); Q-001 a Q-004 aclaradas (DECISION-001 a 004).

@@ -2,6 +2,7 @@
 
 from contextlib import redirect_stderr, redirect_stdout
 import io
+import os
 from pathlib import Path
 import tempfile
 import unittest
@@ -83,20 +84,28 @@ class RunTaskTests(unittest.TestCase):
 
     def test_script_entrypoint_runs_dry_run_from_repository_root(self):
         root = Path(__file__).resolve().parents[1]
-        result = run_task.subprocess.run(
-            [
-                run_task.sys.executable,
-                str(root / "src/run_task.py"),
-                "--agent", "claude",
-                "--model", "test-model",
-                "--task", "fix typo",
-                "--dry-run",
-            ],
-            cwd=root,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        # Dry-run still resolves the CLI on PATH; provide a fake one so the
+        # test does not depend on what is installed (FINDING-004).
+        with tempfile.TemporaryDirectory() as bin_dir:
+            fake_cli = Path(bin_dir) / "claude"
+            fake_cli.write_text("#!/bin/sh\nexit 0\n")
+            fake_cli.chmod(0o755)
+            env = {**os.environ, "PATH": bin_dir + os.pathsep + os.environ.get("PATH", "")}
+            result = run_task.subprocess.run(
+                [
+                    run_task.sys.executable,
+                    str(root / "src/run_task.py"),
+                    "--agent", "claude",
+                    "--model", "test-model",
+                    "--task", "fix typo",
+                    "--dry-run",
+                ],
+                cwd=root,
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("--effort low", result.stdout)
 
