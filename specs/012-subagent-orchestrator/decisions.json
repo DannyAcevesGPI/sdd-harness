@@ -40,6 +40,17 @@
       "scope": "El orquestador cubre /implement y /validate (FR-001, FR-012, AC-015); /specify, /clarify, /plan y /tasks quedan fuera de la orquestación",
       "artifact": "specs/012-subagent-orchestrator/spec.md",
       "source": "Aclaración humana explícita: «el orquestador debe asumir implement y validate justamente, que son las implementaciones y testeos»"
+    },
+    {
+      "id": "DECISION-005",
+      "kind": "APPROVAL",
+      "actor": "Usuario responsable del proyecto",
+      "date": "2026-10-28",
+      "decision": "Aprobada SPEC-012 v0.3.0",
+      "scope": "Orquestador de subagentes para /implement y /validate con modelo y effort por tarea, catálogo de modelos declarado por el usuario, paralelo sin retrabajo y meta de al menos 30 % menos tokens; autoriza preparar PLAN-012",
+      "artifact": "specs/012-subagent-orchestrator/spec.md",
+      "artifact_sha256": "e1d4e73dfc0067dc48131705124c1f30cb8a0c0605ba5728084b697e1b37c93a",
+      "source": "Aprobación humana explícita: «Listo, he revisado y queda autorizada la spec»"
     }
   ]
 }

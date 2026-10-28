@@ -1,7 +1,7 @@
 # Especificación: Orquestador de subagentes con modelo y effort por tarea
 
 **ID:** SPEC-012
-**Estado:** IN_REVIEW
+**Estado:** APPROVED
 **Versión:** 0.3.0
 **Fecha:** 2026-10-28
 
@@ -592,11 +592,11 @@ Los niveles de modelo se expresan como clases comunes portables (por ejemplo eco
 - [x] Problema, alcance, actores, FR/NFR/SEC/BR y casos límite aplicables definidos.
 - [x] MUST con AC verificables y matriz consistente; sin aclaraciones bloqueantes.
 - [x] Suposiciones/restricciones visibles; no hay diseño innecesario.
-- [ ] SPEC aprobada por humano y decisión durable registrada.
+- [x] SPEC aprobada por humano y decisión durable registrada.
 
 # 17. Estado de aprobación
 
-**Estado actual:** IN_REVIEW
+**Estado actual:** APPROVED
 
 Estados: `DRAFT → IN_REVIEW → APPROVED → SUPERSEDED`.
 
@@ -604,7 +604,7 @@ Estados: `DRAFT → IN_REVIEW → APPROVED → SUPERSEDED`.
 
 Solo decisión humana explícita permite `APPROVED`.
 
-**Aprobado por:** [PENDIENTE]
-**Fecha de aprobación:** [PENDIENTE]
-**Decisión explícita y alcance:** [PENDIENTE; contenido de la decisión humana.]
+**Aprobado por:** Usuario responsable del proyecto
+**Fecha de aprobación:** 2026-10-28
+**Decisión explícita y alcance:** «Listo, he revisado y queda autorizada la spec», respecto a SPEC-012 v0.3.0; autoriza preparar PLAN-012.
 **Registro durable:** `specs/012-subagent-orchestrator/decisions.json` con huella, según `docs/state-reconstruction.md`, antes de PLAN.
