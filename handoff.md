@@ -172,22 +172,63 @@ FEATURE STATUS: VALIDATED
 
 # 5. Próximo trabajo
 
-SPEC-011 y PLAN-011 están aprobados; TASKS-011 está COMPLETED. FINDING-001 de
-SPEC-011 quedó resuelto durante la validación. FINDING-002 mantiene SPEC-011
-BLOCKED hasta ejecutar smokes reales y benchmark. FINDING-004 (prueba
-dependiente del CLI instalado, fallo de CI) quedó resuelto reabriendo TASK-003.
+## 5.1 Retomar aquí (sesión del 2026-10-28 → 2026-10-29)
 
-SPEC-012 (orquestador de subagentes con modelo y effort por tarea) está
-APPROVED (v0.3.0, DECISION-005); Q-001 a Q-004 aclaradas (DECISION-001 a 004).
-PLAN-012 APPROVED (v0.2.0, DECISION-007); TASKS-012 en IN_REVIEW (12 TASK). Depende de SPEC-011.
+Estado al cierre:
 
-FINDING-001/002 de SPEC-010 quedaron resueltos; SPEC-009 sigue revalidada tras
-DECISION-004.
+| Feature | SPEC | PLAN | TASKS | Validación |
+|---------|------|------|-------|------------|
+| SPEC-011 effort por tarea | APPROVED | APPROVED | COMPLETED | BLOCKED (FINDING-002: smokes reales y benchmark) |
+| SPEC-012 orquestador de subagentes | APPROVED v0.3.0 (DECISION-005) | APPROVED v0.2.0 (DECISION-007) | IN_REVIEW v0.1.0, 12 TASK | — |
 
 ```text
 Bloqueos conocidos: 1 (validación SPEC-011)
-Próxima acción: revisión y aprobación humana de TASKS-012; resolver GAP-001/GAP-002 y repetir /validate SPEC-011
+Próxima acción: aprobación humana de TASKS-012; luego /implement SPEC-012
 ```
+
+Pasos para continuar:
+
+1. Bootstrap (§2) y `python3 src/check_harness_state.py` → debe dar PASS.
+2. Revisar `specs/012-subagent-orchestrator/tasks.md`. Solo con aprobación
+   humana explícita: metadatos `APPROVED`, huella con `canonical_bytes`, evento
+   `APPROVAL` en `specs/012-subagent-orchestrator/decisions.json` (siguiente ID:
+   DECISION-008) y checker PASS.
+3. `/implement SPEC-012`, primera oleada paralela con rutas disjuntas:
+   TASK-001, TASK-002, TASK-003, TASK-004. Después TASK-005 → TASK-006 →
+   TASK-007 → TASK-008 → TASK-009 → {TASK-010, TASK-011} → TASK-012. TDD
+   obligatorio salvo TASK-001 y TASK-012 (justificado en TASKS).
+4. Antes de TASK-012 (prerrequisitos del usuario):
+   - Declarar `harness-models.json` en la raíz (niveles `economy`, `standard`,
+     `advanced` por runtime; formato en PLAN-012 DEC-003).
+   - Configurar permisos de edición headless en cada CLI sin flags de omisión
+     de permisos (RISK-003).
+5. SPEC-011 sigue pendiente de GAP-001/GAP-002; los smokes de TASK-012 de
+   SPEC-012 ejercitan los mismos adaptadores y pueden aportar evidencia.
+
+Decisiones vigentes que no deben reabrirse sin motivo:
+
+- Meta NFR-001 de SPEC-012: ≥ 30 % menos tokens; `cache_read` cuenta y se
+  reporta también el total sin cache (Q-001, Q-TECH-001).
+- Catálogo de modelos declarado por el usuario; sin catálogo no se cambia de
+  modelo (Q-002).
+- Paralelo solo sin retrabajo; orquestador cubre `/implement` y `/validate`
+  (Q-003, Q-004).
+
+Repositorio y CI:
+
+- Rama de trabajo: `v1` (sincronizada con `origin/v1`). Ramas de fase ya
+  integradas en `v1`: `spec-012-subagent-orchestrator`,
+  `plan-012-subagent-orchestrator`, `fix-011-ci-hermetic-test`,
+  `tasks-012-subagent-orchestrator`; sus worktrees en `.claude/worktrees/`
+  pueden eliminarse.
+- GitHub Actions corre solo en push/PR a `master` y manualmente
+  (`workflow_dispatch`); pushes a `v1` no la disparan. Último run verde:
+  40781872859 (FINDING-004 de SPEC-011 resuelto, suite 72/72).
+
+## 5.2 Contexto adicional
+
+FINDING-001/002 de SPEC-010 quedaron resueltos; SPEC-009 sigue revalidada tras
+DECISION-004.
 
 El permiso de ledger y proyecciones por fase ya está incorporado a `AGENTS.md`
 y commands. Verificar gates con `decisions.json` y
