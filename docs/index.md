@@ -46,6 +46,11 @@ Consultar solo cuando aplique al trabajo:
 
 ## Evidencia y features
 
+### Feature activa
+
+- `specs/012-subagent-orchestrator/spec.md` — SPEC DRAFT; orquestador con subagentes y modelo/effort por tarea; Q-001/Q-002 bloqueantes.
+- `specs/012-subagent-orchestrator/decisions.json` — ledger vacío.
+
 Las aprobaciones de SPEC-001 a SPEC-006 que dependen del chat se tratan como
 legado no verificable, sin cambiar sus validaciones.
 
