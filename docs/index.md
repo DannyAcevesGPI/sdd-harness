@@ -56,6 +56,7 @@ Consultar solo cuando aplique al trabajo:
 - `specs/011-task-based-model-effort/decisions.json` — aclaración Q-001 y aprobaciones de SPEC/PLAN/TASKS registradas.
 - `specs/012-subagent-orchestrator/spec.md` — SPEC APPROVED; orquestador con subagentes y modelo/effort por tarea; meta ≥ 30 % menos tokens, catálogo declarado por el usuario.
 - `specs/012-subagent-orchestrator/plan.md` — PLAN APPROVED; command `/orchestrate` + helper determinista, subagentes CLI headless, catálogo `harness-models.json`.
+- `specs/012-subagent-orchestrator/tasks.md` — TASKS IN_REVIEW; 12 TASK con paralelos y conflictos de archivo secuenciados.
 - `specs/012-subagent-orchestrator/decisions.json` — aclaraciones Q-001 a Q-004 y Q-TECH-001; aprobaciones de SPEC y PLAN registradas.
 
 Las aprobaciones de SPEC-001 a SPEC-006 que dependen del chat se tratan como
