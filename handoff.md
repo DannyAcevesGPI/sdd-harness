@@ -3,7 +3,7 @@
 Fecha de actualización: 2026-10-28.
 
 ```json harness-state
-{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "VALIDATE", "next": "/validate"}, {"id": "SPEC-012", "phase": "PLAN", "next": "/plan"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
+{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "VALIDATE", "next": "/validate"}, {"id": "SPEC-012", "phase": "PLAN", "next": "approve PLAN"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
 ```
 
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese
@@ -178,14 +178,14 @@ BLOCKED hasta ejecutar smokes reales y benchmark.
 
 SPEC-012 (orquestador de subagentes con modelo y effort por tarea) está
 APPROVED (v0.3.0, DECISION-005); Q-001 a Q-004 aclaradas (DECISION-001 a 004).
-Depende de SPEC-011.
+PLAN-012 en IN_REVIEW (Q-TECH-001 no bloqueante). Depende de SPEC-011.
 
 FINDING-001/002 de SPEC-010 quedaron resueltos; SPEC-009 sigue revalidada tras
 DECISION-004.
 
 ```text
 Bloqueos conocidos: 1 (validación SPEC-011)
-Próxima acción: /plan SPEC-012; resolver GAP-001/GAP-002 y repetir /validate SPEC-011
+Próxima acción: revisión y aprobación humana de PLAN-012; resolver GAP-001/GAP-002 y repetir /validate SPEC-011
 ```
 
 El permiso de ledger y proyecciones por fase ya está incorporado a `AGENTS.md`
