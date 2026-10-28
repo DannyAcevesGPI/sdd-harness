@@ -3,7 +3,7 @@
 Fecha de actualización: 2026-10-28.
 
 ```json harness-state
-{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "VALIDATE", "next": "/validate"}, {"id": "SPEC-012", "phase": "TASKS", "next": "/tasks"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
+{"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "IMPLEMENT", "next": "/implement"}, {"id": "SPEC-012", "phase": "TASKS", "next": "/tasks"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
 ```
 
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese

@@ -301,6 +301,16 @@ simulados; su aceptación real por combinación CLI/modelo sigue bloqueada.
 **Status:** OPEN  
 **Required action:** Proveer/confirmar combinaciones de modelo y disponibilidad para smokes y benchmark; resolver el acceso local de OpenCode y repetir `/validate`.
 
+## FINDING-004 — Prueba de entrada de script depende del CLI instalado
+
+**Type:** IMPLEMENTATION  
+**Severity:** MEDIUM  
+**Related artifacts:** TASK-003, TEST-008  
+**Description:** `test_script_entrypoint_runs_dry_run_from_repository_root` requería el CLI `claude` real en `PATH`; falla en GitHub Actions.  
+**Evidence:** `evidence/finding-004.md`  
+**Status:** OPEN  
+**Required action:** Reabrir TASK-003 y hacer hermética la prueba con un CLI falso en `PATH`.
+
 # 21. Findings Summary
 
 | Severity | Open | Resolved |

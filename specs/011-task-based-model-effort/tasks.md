@@ -3,7 +3,7 @@
 **ID:** TASKS-011
 **SPEC relacionada:** SPEC-011
 **PLAN relacionado:** PLAN-011
-**Estado:** COMPLETED
+**Estado:** IN_PROGRESS
 **Versión:** 0.1.0
 **Fecha:** 2026-10-27
 
@@ -146,7 +146,7 @@ Resultado RED y GREEN de `TEST-001` a `TEST-004` en `evidence/task-002.md`.
 
 ## TASK-003 — Implementar el ejecutor y adaptadores CLI
 
-**Estado:** DONE
+**Estado:** TODO
 **Tipo:** FEATURE
 **Prioridad:** P1
 
@@ -389,7 +389,7 @@ TASK-001 → TASK-002 → TASK-003 → TASK-004 → TASK-005 → TASK-006
 |------:|-------|------------|--------|
 | 1 | TASK-001 | — | DONE |
 | 2 | TASK-002 | TASK-001 | DONE |
-| 3 | TASK-003 | TASK-002 | DONE |
+| 3 | TASK-003 | TASK-002 | TODO |
 | 4 | TASK-004 | TASK-003 | DONE |
 | 5 | TASK-005 | TASK-001, TASK-003, TASK-004 | DONE |
 | 6 | TASK-006 | TASK-003, TASK-004, TASK-005 | DONE |
@@ -424,7 +424,7 @@ Cambio de requisito → revisar SPEC; diseño → PLAN; trabajo/dependencias →
 
 # 15. Estado del documento
 
-**Estado actual:** COMPLETED
+**Estado actual:** IN_PROGRESS
 
 `DRAFT → IN_REVIEW → APPROVED → IN_PROGRESS → COMPLETED`. La primera TASK inicia `IN_PROGRESS`; todas las requeridas `DONE`, sin bloqueos y con evidencia permiten `COMPLETED`. Esto no valida la feature. Tras finding de implementación, `COMPLETED → IN_PROGRESS` y reapertura según `/implement` §17.1, sin nueva aprobación si el trabajo autorizado no cambia.
 
