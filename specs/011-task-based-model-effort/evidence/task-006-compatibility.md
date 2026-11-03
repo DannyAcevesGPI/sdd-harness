@@ -28,3 +28,20 @@
 ## Estado
 
 TEST-015 y TEST-016 quedan NOT_RUN con causa concreta; TEST-017 queda BLOCKED por el entorno. No se afirma PASS para smoke real ni compatibilidad de combinación modelo/proveedor no ejecutada.
+
+## Actualización 2026-11-03 — VALIDATION-002
+
+La matriz de arriba se conserva como registro del 2026-10-27. Con consumo
+autorizado por el usuario se ejecutó la evidencia real; detalle en
+`evidence/validation-002-real-runtime.md`.
+
+| CLI | Versión | Modelo | Estado smoke | Motivo/evidencia |
+|-----|---------|--------|--------------|------------------|
+| Claude Code | `2.1.317` | `claude-sonnet-5-5` (Anthropic) | PASS | Runner real: low/medium/high aplicados, 3/3 tareas correctas, rc=0. |
+| Codex CLI | `0.162.1` | no indicado | NOT_RUN | El usuario no indicó modelo y no se infiere de la configuración personal. |
+| OpenCode | `v2.2.0` | — | BLOCKED | El usuario decidió dejarlo BLOCKED; `opencode models` falla con `ServiceUnavailableError: Location plugins did not finish activating`. |
+
+- TEST-015: PASS.
+- TEST-016: NOT_RUN.
+- TEST-017: BLOCKED.
+- Benchmark NFR-001 frente a `medium` fijo registrado para Claude Code (GAP-002).

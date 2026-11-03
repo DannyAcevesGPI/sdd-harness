@@ -1,6 +1,6 @@
 # SDD Harness — Live Handoff
 
-Fecha de actualización: 2026-10-28.
+Fecha de actualización: 2026-11-03.
 
 ```json harness-state
 {"schema_version": 1, "active": [{"id": "SPEC-011", "phase": "VALIDATE", "next": "/validate"}, {"id": "SPEC-012", "phase": "TASKS", "next": "approve TASKS"}], "validated": ["SPEC-001", "SPEC-002", "SPEC-003", "SPEC-004", "SPEC-005", "SPEC-006", "SPEC-007", "SPEC-008", "SPEC-009", "SPEC-010"]}
@@ -9,10 +9,12 @@ Fecha de actualización: 2026-10-28.
 Este archivo es estado vivo. No contiene el historial completo de auditorías; ese
 detalle se consulta bajo demanda en `docs/audit-history.md`, `specs/` y Git.
 
-SPEC-011 tiene TASKS COMPLETED y validación BLOCKED: los contratos simulados y
-la suite local pasan, pero faltan smokes reales por CLI/modelo y el benchmark
-NFR-001. Detalle en `specs/011-task-based-model-effort/validation.md` y
-`specs/011-task-based-model-effort/evidence/task-006-compatibility.md`.
+SPEC-011 tiene TASKS COMPLETED y validación BLOCKED (VALIDATION-002,
+2026-11-03): pasan el smoke real de Claude Code + `claude-sonnet-5-5` y el
+benchmark NFR-001. Faltan Codex (modelo no indicado), OpenCode (BLOCKED) y
+los proveedores DeepSeek/GLM. Detalle en
+`specs/011-task-based-model-effort/validation.md` y
+`specs/011-task-based-model-effort/evidence/validation-002-real-runtime.md`.
 
 ---
 
@@ -178,7 +180,7 @@ Estado al cierre:
 
 | Feature | SPEC | PLAN | TASKS | Validación |
 |---------|------|------|-------|------------|
-| SPEC-011 effort por tarea | APPROVED | APPROVED | COMPLETED | BLOCKED (FINDING-002: smokes reales y benchmark) |
+| SPEC-011 effort por tarea | APPROVED | APPROVED | COMPLETED | BLOCKED (VALIDATION-002; FINDING-002: Codex, OpenCode, DeepSeek/GLM) |
 | SPEC-012 orquestador de subagentes | APPROVED v0.3.0 (DECISION-005) | APPROVED v0.2.0 (DECISION-007) | IN_REVIEW v0.1.0, 12 TASK | — |
 
 ```text
@@ -202,8 +204,11 @@ Pasos para continuar:
      `advanced` por runtime; formato en PLAN-012 DEC-003).
    - Configurar permisos de edición headless en cada CLI sin flags de omisión
      de permisos (RISK-003).
-5. SPEC-011 sigue pendiente de GAP-001/GAP-002; los smokes de TASK-012 de
-   SPEC-012 ejercitan los mismos adaptadores y pueden aportar evidencia.
+5. SPEC-011 sigue pendiente de GAP-001 (parcial; GAP-002 resuelto). Faltan
+   el modelo de Codex, desbloquear OpenCode y una combinación DeepSeek y GLM.
+   Los smokes de TASK-012 de SPEC-012 ejercitan los mismos adaptadores y
+   pueden aportar evidencia. DISCOVERY-001 (warning de effort con rc=0 en
+   Claude Code) es candidato a `/specify`.
 
 Decisiones vigentes que no deben reabrirse sin motivo:
 
